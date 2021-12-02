@@ -10,7 +10,6 @@ def KL_divg(Q, S): # expects normalized distributions
     divg = 0
     Q = np.ndarray.flatten(Q)
     S = np.ndarray.flatten(S)
-
     for q,s in zip(Q,S):
         divg += q*np.log2((q+delta)/(s+delta))
     return divg
@@ -23,7 +22,6 @@ def calc_hist(arr, intv, bins): # img numpy arr, intv: interval size, bins: numb
     return hist
 
 
-
 root_dir = '../dataset/'
 
 file = open(root_dir + 'InstanceNames.txt', 'r')
@@ -32,24 +30,69 @@ instance_names = file.read().splitlines()
 q_directories = ['query_1', 'query_2', 'query_3']
 s_directory = 'support_96'
 
+# dictionaries label: np.arr for each img
+# Q: query set, S: support set
+Q_1 = dict()
+Q_2 = dict()
+Q_3 = dict()
+S = dict()
 
-dir = root_dir + q_directories[0] + '/' + instance_names[0]
+# read data into Q, S
+for inst in instance_names:
+    q1_dir = root_dir + q_directories[0] + '/' + inst
+    q1_img = Image.open(q1_dir)
+    q1_arr = np.array(q1_img)
+    Q_1[inst] = q1_arr
 
-img = Image.open(dir)
-imgArr = np.array(img)
+    q2_dir = root_dir + q_directories[1] + '/' + inst
+    q2_img = Image.open(q2_dir)
+    q2_arr = np.array(q2_img)
+    Q_2[inst] = q2_arr
 
-hist = calc_hist(imgArr, 16, 16)
+    q3_dir = root_dir + q_directories[2] + '/' + inst
+    q3_img = Image.open(q3_dir)
+    q3_arr = np.array(q3_img)
+    Q_3[inst] = q3_arr
 
-print(hist)
-print(np.sum(hist))
-print(hist.shape)
+    s_dir = root_dir + s_directory + '/' + inst
+    s_img = Image.open(s_dir)
+    s_arr = np.array(s_img)
+    S[inst] = s_arr
 
-hist_norm = normalize_hist(hist)
-
-print(hist_norm)
-print(np.sum(hist_norm))
-print(hist_norm.shape)
+QS = [Q_1, Q_2, Q_3]
 
 
-divg = KL_divg(hist, hist.T)
-print(divg)
+# Start histogram computations for each configuration
+
+# Normalize data corresponding to the configuration, generically
+# config-1, whole histogram
+
+
+for Q in QS: # for each query
+    for q in Q: # for each img in the query set
+        for s in S: # for each img in the support set
+
+            
+
+
+
+
+
+
+"""
+debug
+"""
+
+for q_folder in q_directories:
+    for q_inst in instance_names:
+        q_dir = root_dir + q_folder + '/' + q_inst
+        q_img = Image.open(q_dir)
+        q_arr = np.array(q_img)
+        q_arr_norm = normalize_hist(q_arr)
+
+        for s_inst in instance_names:
+            sdir = root_dir + s_directory + '/' + s_inst
+            s_img = Image.open(sdir)
+            s_arr = np.array(s_img)
+            s_arr_norm = normalize_hist(s_arr)
+            divg = KL_divg(q_arr_norm, s_arr_norm)

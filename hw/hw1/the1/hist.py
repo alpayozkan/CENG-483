@@ -1,5 +1,7 @@
+from matplotlib.pyplot import hist
 import numpy as np
 from PIL import Image
+from numpy.lib.function_base import _calculate_shapes
 
 delta = 1e-6
 
@@ -10,9 +12,7 @@ def KL_divg(Q, S): # expects normalized distributions
     divg = 0
     Q = np.ndarray.flatten(Q)
     S = np.ndarray.flatten(S)
-    for q,s in zip(Q,S):
-        divg += q*np.log2((q+delta)/(s+delta))
-    return divg
+    return  np.sum(Q*np.log2((Q+delta)/(S+delta)))
 
 def calc_hist(arr, intv, bins): # img numpy arr, intv: interval size, bins: number of bins, intv*bins=256, return np.arr histogram
     hist = np.zeros((bins, bins, bins))
@@ -61,18 +61,38 @@ for inst in instance_names:
 
 QS = [Q_1, Q_2, Q_3]
 
+# store results for each query set
+Q1_Res = dict()
+Q2_Res = dict()
+Q3_Res = dict()
+
+QS_Res = [Q1_Res, Q2_Res, Q3_Res]
 
 # Start histogram computations for each configuration
 
 # Normalize data corresponding to the configuration, generically
 # config-1, whole histogram
 
+res = dict()
+intvs = [16, 32, 64, 128]
 
-for Q in QS: # for each query
+S_hists = dict()
+for s in S: # for each img in the support set
+    S_hists[s] = normalize_hist(calc_hist(S[s], 16, 16))
+
+for Q,Q_Res in zip(QS,QS_Res): # for each query
     for q in Q: # for each img in the query set
-        for s in S: # for each img in the support set
-
+        q_hist = normalize_hist(calc_hist(Q[q], 16, 16))
+        hist_diff = dict()
+        for s in S:
+            hist_diff[s] = KL_divg(q_hist, S_hists[s])
+        argmin_hist = min(hist_diff, key=hist_diff.get)
+        min_hist = hist_diff[argmin_hist]
+        Q_Res[q] = (argmin_hist, min_hist)
             
+print(Q1_Res)
+print(Q2_Res)
+print(Q3_Res)            
 
 
 
@@ -82,7 +102,7 @@ for Q in QS: # for each query
 """
 debug
 """
-
+"""
 for q_folder in q_directories:
     for q_inst in instance_names:
         q_dir = root_dir + q_folder + '/' + q_inst
@@ -96,3 +116,4 @@ for q_folder in q_directories:
             s_arr = np.array(s_img)
             s_arr_norm = normalize_hist(s_arr)
             divg = KL_divg(q_arr_norm, s_arr_norm)
+"""

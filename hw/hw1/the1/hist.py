@@ -18,9 +18,15 @@ def calc_hist(arr, intv, bins): # img numpy arr, intv: interval size, bins: numb
     hist = np.zeros((bins, bins, bins))
     for row in arr:
         for pix in row:
-            hist[pix[0]//bins][pix[1]//bins][pix[2]//bins] += 1
+            hist[pix[0]//intv][pix[1]//intv][pix[2]//intv] += 1
     return hist
 
+def top1_acc(Q_Res):
+    corr = 0
+    for q in Q_Res:
+        if q == Q_Res[q][0]:
+            corr +=1
+    return corr/len(Q_Res)
 
 root_dir = '../dataset/'
 
@@ -59,40 +65,51 @@ for inst in instance_names:
     s_arr = np.array(s_img)
     S[inst] = s_arr
 
-QS = [Q_1, Q_2, Q_3]
+import copy
+QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 
 # store results for each query set
 Q1_Res = dict()
 Q2_Res = dict()
 Q3_Res = dict()
+S_Res = dict()
 
-QS_Res = [Q1_Res, Q2_Res, Q3_Res]
+QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
 
-# Start histogram computations for each configuration
 
-# Normalize data corresponding to the configuration, generically
-# config-1, whole histogram
+
+# config-1, whole histogram 3D
 
 res = dict()
 intvs = [16, 32, 64, 128]
 
-S_hists = dict()
-for s in S: # for each img in the support set
-    S_hists[s] = normalize_hist(calc_hist(S[s], 16, 16))
+acc_qnt_qry = [[] for i in range(len(intvs))]
 
-for Q,Q_Res in zip(QS,QS_Res): # for each query
-    for q in Q: # for each img in the query set
-        q_hist = normalize_hist(calc_hist(Q[q], 16, 16))
-        hist_diff = dict()
-        for s in S:
-            hist_diff[s] = KL_divg(q_hist, S_hists[s])
-        argmin_hist = min(hist_diff, key=hist_diff.get)
-        min_hist = hist_diff[argmin_hist]
-        Q_Res[q] = (argmin_hist, min_hist)
-            
-print(Q1_Res)
-print(Q2_Res)
-print(Q3_Res)            
+
+for inv,acc_query in zip(intvs, acc_qnt_qry):
+    # intv x bins = 256
+    bins = 256//inv    
+    S_hists = dict()
+
+    # Normalize data corresponding to the configuration
+    for s in S: # for each img in the support set
+        S_hists[s] = normalize_hist(calc_hist(S[s], inv, bins))
+        
+    for Q,Q_Res in zip(QS,QS_Res): # for each query
+        for q in Q: # for each img in the query set
+            q_hist = normalize_hist(calc_hist(Q[q], inv, bins))
+            hist_diff = dict()
+            for s in S:
+                hist_diff[s] = KL_divg(q_hist, S_hists[s])
+            # get the best matching with lowest kl divg
+            argmin_hist = min(hist_diff, key=hist_diff.get)
+            min_hist = hist_diff[argmin_hist]
+            # store the matching
+            Q_Res[q] = (argmin_hist, min_hist)
+        # calculate acc for the query-i
+        acc = top1_acc(Q_Res)
+        acc_query.append(acc)
+
 
 
 

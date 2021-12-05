@@ -168,3 +168,13 @@ QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 intvs = [8, 16, 32, 64, 128]
 
 config_2_res = calc_results_conf2(QS, S, intvs)
+
+# Part 3-5
+
+def partition_img(img, grid, M): 
+    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid)
+    height, width, depth = img.shape
+    P = img.reshape(grid, M, -1, grid, depth)
+    P = P.swapaxes(1,2)
+    P = P.reshape(-1,grid,grid,depth)
+    return P

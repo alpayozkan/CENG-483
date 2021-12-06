@@ -162,6 +162,43 @@ In this section, give your results without dividing the images into grids.
 \section{Grid Based Feature Extraction - Query set 1}
 Give your top-1 accuracy for all of the configurations below.
 
+% temporary table to gather overall results
+% remove after separate insertions to each subsection
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results Spatial Grid: 3d histogram (intv=64)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.555 & 0.155 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.36 & 0.22 & 1.0 \\
+    \hline
+    16 x 16 & 1.0 & 0.3 & 0.255 & 1.0 \\
+    \hline
+    12 x 12 & 1.0 & 0.31 & 0.3 & 1.0 \\
+    \hline
+\end{tabular}
+
+\vspace*{1cm}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results Spatial Grid: per-channel histogram (intv=32)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.36 & 0.22 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.205 & 0.26 & 1.0 \\
+    \hline
+    16 x 16 & 1.0 & 0.13 & 0.27 & 1.0 \\
+    \hline
+    12 x 12 & 0.995 & 0.1 & 0.265 & 1.0 \\
+    \hline
+\end{tabular}
+
 \subsection{$48\times48$ spatial grid}
 \begin{itemize}
 \item 3d color histogram:

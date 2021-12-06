@@ -5,10 +5,13 @@ import copy
 delta = 1e-6
 
 def normalize_hist(hist):
-    return (hist / np.sum(hist))
+    s = np.sum(hist)
+    return (hist/s)
+
+def normalize_mult_hists(hists): # hists contains many histograms, np.ndarray
+    return np.array([normalize_hist(x) for x in hists])
 
 def KL_divg(Q, S): # expects normalized distributions
-    divg = 0
     Q = np.ndarray.flatten(Q)
     S = np.ndarray.flatten(S)
     return  np.sum(Q*np.log2((Q+delta)/(S+delta)))
@@ -20,24 +23,34 @@ def calc_hist(arr, intv, bins, type): # generic hist function, type='3d' or 'per
         return calc_hist_per_channel(arr, intv, bins)
     else:
         raise TypeError("Invalid Histogram Type")
-        
+
+def calc_hist_grid_3d(arr, intv, bins, grid): # returns list of histograms
+    P = partition_img3d(arr, grid) # list of partitions
+    H = np.array([calc_hist_3d(x, intv, bins) for x in P])
+    return H
+
+def calc_hist_grid_per_channel(arr, intv, bins, grid):
+    P = partition_img3d(arr, grid) # list of partitions
+    H = np.array([calc_hist_per_channel(x, intv, bins) for x in P])
+    return H
+
 def calc_hist_3d(arr, intv, bins): # img numpy arr, intv: interval size, bins: number of bins, intv*bins=256, return np.arr histogram
     hist = np.zeros((bins, bins, bins))
     for row in arr:
         for pix in row:
             hist[pix[0]//intv][pix[1]//intv][pix[2]//intv] += 1
+    hist = normalize_hist(hist)
     return hist
 
 def calc_hist_per_channel(arr, intv, bins): # img numpy arr, intv: interval size, bins: number of bins, intv*bins=256, return np.arr histogram
-    hist_0 = np.zeros(bins)
-    hist_1 = np.zeros(bins)
-    hist_2 = np.zeros(bins)
+    hist = np.zeros((3,bins))
     for row in arr:
         for pix in row:
-            hist_0[pix[0]//intv] += 1
-            hist_1[pix[1]//intv] += 1
-            hist_2[pix[2]//intv] += 1
-    return (hist_0,hist_1,hist_2)
+            hist[0][pix[0]//intv] += 1
+            hist[1][pix[1]//intv] += 1
+            hist[2][pix[2]//intv] += 1
+    hist = normalize_mult_hists(hist)
+    return hist
 
 def top1_acc(Q_Res):
     corr = 0
@@ -48,10 +61,7 @@ def top1_acc(Q_Res):
 
 def calc_results_conf1(QS, S, intvs):
     # store results for each query set
-    Q1_Res = dict()
-    Q2_Res = dict()
-    Q3_Res = dict()
-    S_Res = dict()
+    Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
     QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
 
     acc_qnt_qry = [[] for i in range(len(intvs))]
@@ -63,11 +73,12 @@ def calc_results_conf1(QS, S, intvs):
 
         # Normalize data corresponding to the configuration
         for s in S: # for each img in the support set
-            S_hists[s] = normalize_hist(calc_hist_3d(S[s], inv, bins))
+            S_hists[s] = calc_hist_3d(S[s], inv, bins)
 
         for Q,Q_Res in zip(QS,QS_Res): # for each query
             for q in Q: # for each img in the query set
-                q_hist = normalize_hist(calc_hist_3d(Q[q], inv, bins))
+                q_hist = calc_hist_3d(Q[q], inv, bins)
+
                 hist_diff = dict()
                 for s in S:
                     hist_diff[s] = KL_divg(q_hist, S_hists[s])
@@ -83,10 +94,7 @@ def calc_results_conf1(QS, S, intvs):
 
 def calc_results_conf2(QS, S, intvs):
     # store results for each query set
-    Q1_Res = dict()
-    Q2_Res = dict()
-    Q3_Res = dict()
-    S_Res = dict()
+    Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
     QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
 
     acc_qnt_qry = [[] for i in range(len(intvs))]
@@ -98,13 +106,12 @@ def calc_results_conf2(QS, S, intvs):
         
         # Normalize data corresponding to the configuration
         for s in S: # for each img in the support set
-            h_0,h_1,h_2 = calc_hist_per_channel(S[s], inv, bins)
-            S_hists[s] = np.array([normalize_hist(h_0),normalize_hist(h_1),normalize_hist(h_2)])
+            S_hists[s] = calc_hist_per_channel(S[s], inv, bins)
 
         for Q,Q_Res in zip(QS,QS_Res): # for each query
             for q in Q: # for each img in the query set
-                h_0,h_1,h_2 = calc_hist_per_channel(Q[q], inv, bins)
-                q_hist = np.array([normalize_hist(h_0), normalize_hist(h_1), normalize_hist(h_2)])
+                q_hist = calc_hist_per_channel(Q[q], inv, bins)
+
                 hist_diff = dict()
                 for s in S:
                     hist_diff[s] = KL_divg(q_hist, S_hists[s])/len(q_hist) # avg divg over channels
@@ -118,7 +125,71 @@ def calc_results_conf2(QS, S, intvs):
             acc_query.append(acc)
     return acc_qnt_qry
 
+def calc_results_conf3(QS, S, grids, intv): # grids = [48,24,16,12] grids
+    # store results for each query set
+    Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
+    QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
 
+    acc_qnt_qry = [[] for i in range(len(grids))]
+    
+    bins = 256//intv
+
+    for grid,acc_query in zip(grids, acc_qnt_qry):
+        S_hists = dict()
+        
+        # Normalize data corresponding to the configuration
+        for s in S: # for each img in the support set
+            S_hists[s] = calc_hist_grid_3d(S[s], intv, bins, grid)
+
+        for Q,Q_Res in zip(QS,QS_Res): # for each query
+            for q in Q: # for each img in the query set
+                q_hist = calc_hist_grid_3d(Q[q], intv, bins, grid)
+                
+                hist_diff = dict()
+                for s in S:
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])/len(q_hist) # avg divg over channels
+                # get the best matching with lowest kl divg
+                argmin_hist = min(hist_diff, key=hist_diff.get)
+                min_hist = hist_diff[argmin_hist]
+                # store the matching
+                Q_Res[q] = (argmin_hist, min_hist)
+            # calculate acc for the query-i
+            acc = top1_acc(Q_Res)
+            acc_query.append(acc)
+    return acc_qnt_qry
+
+def calc_results_conf4(QS, S, grids, intv): # grids = [48,24,16,12] grids
+    # store results for each query set
+    Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
+    QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
+
+    acc_qnt_qry = [[] for i in range(len(grids))]
+    
+    bins = 256//intv
+
+    for grid,acc_query in zip(grids, acc_qnt_qry):
+        S_hists = dict()
+        
+        # Normalize data corresponding to the configuration
+        for s in S: # for each img in the support set
+            S_hists[s] = calc_hist_grid_per_channel(S[s], intv, bins, grid)
+
+        for Q,Q_Res in zip(QS,QS_Res): # for each query
+            for q in Q: # for each img in the query set
+                q_hist = calc_hist_grid_per_channel(Q[q], intv, bins, grid)
+                
+                hist_diff = dict()
+                for s in S:
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])/len(q_hist) # avg divg over channels
+                # get the best matching with lowest kl divg
+                argmin_hist = min(hist_diff, key=hist_diff.get)
+                min_hist = hist_diff[argmin_hist]
+                # store the matching
+                Q_Res[q] = (argmin_hist, min_hist)
+            # calculate acc for the query-i
+            acc = top1_acc(Q_Res)
+            acc_query.append(acc)
+    return acc_qnt_qry
 
 root_dir = '../dataset/'
 
@@ -170,14 +241,14 @@ QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 ######################################################################################################
 # config-2, per channel histogram
 
-intvs = [8, 16, 32, 64, 128]
+# intvs = [8, 16, 32, 64, 128]
 
-config_2_res = calc_results_conf2(QS, S, intvs)
+# config_2_res = calc_results_conf2(QS, S, intvs)
 
 ######################################################################################################
 # Part 3-5
 
-def partition_img3d(img, grid, M): 
+def partition_img3d(img, grid): 
     # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid), returns list
     h,w,d = img.shape
     P = [img[i:i+grid,j:j+grid] for i in range(0,h,grid) for j in range(0,w,grid)]
@@ -194,12 +265,13 @@ def partition_img2d(img, grid, M):  # I couldnt generalize into 3D, but I plan t
 grid_intvs = [48, 24, 16, 12]
 # pick best configs for 3d and per channel
 intv_3d = 64
-bins_3d = 256//intv_3d
+# bins_3d = 256//intv_3d
 
 intv_per_ch = 32
-bins_per_ch = 256//intv_per_ch
+# bins_per_ch = 256//intv_per_ch
 
-
+# config_3_res = calc_results_conf3(QS, S, grid_intvs, intv_3d)
+config_4_res = calc_results_conf4(QS, S, grid_intvs, intv_per_ch)
 
 
 

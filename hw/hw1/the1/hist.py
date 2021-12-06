@@ -13,7 +13,15 @@ def KL_divg(Q, S): # expects normalized distributions
     S = np.ndarray.flatten(S)
     return  np.sum(Q*np.log2((Q+delta)/(S+delta)))
 
-def calc_hist3d(arr, intv, bins): # img numpy arr, intv: interval size, bins: number of bins, intv*bins=256, return np.arr histogram
+def calc_hist(arr, intv, bins, type): # generic hist function, type='3d' or 'per_channel'
+    if type=='3d':
+        return calc_hist_3d(arr, intv, bins)
+    elif type=='per_channel':
+        return calc_hist_per_channel(arr, intv, bins)
+    else:
+        raise TypeError("Invalid Histogram Type")
+        
+def calc_hist_3d(arr, intv, bins): # img numpy arr, intv: interval size, bins: number of bins, intv*bins=256, return np.arr histogram
     hist = np.zeros((bins, bins, bins))
     for row in arr:
         for pix in row:
@@ -55,11 +63,11 @@ def calc_results_conf1(QS, S, intvs):
 
         # Normalize data corresponding to the configuration
         for s in S: # for each img in the support set
-            S_hists[s] = normalize_hist(calc_hist3d(S[s], inv, bins))
+            S_hists[s] = normalize_hist(calc_hist_3d(S[s], inv, bins))
 
         for Q,Q_Res in zip(QS,QS_Res): # for each query
             for q in Q: # for each img in the query set
-                q_hist = normalize_hist(calc_hist3d(Q[q], inv, bins))
+                q_hist = normalize_hist(calc_hist_3d(Q[q], inv, bins))
                 hist_diff = dict()
                 for s in S:
                     hist_diff[s] = KL_divg(q_hist, S_hists[s])
@@ -91,18 +99,15 @@ def calc_results_conf2(QS, S, intvs):
         # Normalize data corresponding to the configuration
         for s in S: # for each img in the support set
             h_0,h_1,h_2 = calc_hist_per_channel(S[s], inv, bins)
-            S_hists[s] = (normalize_hist(h_0),normalize_hist(h_1),normalize_hist(h_2))
+            S_hists[s] = np.array([normalize_hist(h_0),normalize_hist(h_1),normalize_hist(h_2)])
 
         for Q,Q_Res in zip(QS,QS_Res): # for each query
             for q in Q: # for each img in the query set
                 h_0,h_1,h_2 = calc_hist_per_channel(Q[q], inv, bins)
-                q_hist = (normalize_hist(h_0), normalize_hist(h_1), normalize_hist(h_2))
+                q_hist = np.array([normalize_hist(h_0), normalize_hist(h_1), normalize_hist(h_2)])
                 hist_diff = dict()
                 for s in S:
-                    kl_0 = KL_divg(q_hist[0], S_hists[s][0])
-                    kl_1 = KL_divg(q_hist[1], S_hists[s][1])
-                    kl_2 = KL_divg(q_hist[2], S_hists[s][2])
-                    hist_diff[s] = (kl_0+kl_1+kl_2)/3
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])/len(q_hist) # avg divg over channels
                 # get the best matching with lowest kl divg
                 argmin_hist = min(hist_diff, key=hist_diff.get)
                 min_hist = hist_diff[argmin_hist]
@@ -165,9 +170,9 @@ QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 ######################################################################################################
 # config-2, per channel histogram
 
-# intvs = [8, 16, 32, 64, 128]
+intvs = [8, 16, 32, 64, 128]
 
-# config_2_res = calc_results_conf2(QS, S, intvs)
+config_2_res = calc_results_conf2(QS, S, intvs)
 
 ######################################################################################################
 # Part 3-5

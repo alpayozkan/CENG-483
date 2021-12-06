@@ -13,7 +13,7 @@ def KL_divg(Q, S): # expects normalized distributions
     S = np.ndarray.flatten(S)
     return  np.sum(Q*np.log2((Q+delta)/(S+delta)))
 
-def calc_hist(arr, intv, bins): # img numpy arr, intv: interval size, bins: number of bins, intv*bins=256, return np.arr histogram
+def calc_hist3d(arr, intv, bins): # img numpy arr, intv: interval size, bins: number of bins, intv*bins=256, return np.arr histogram
     hist = np.zeros((bins, bins, bins))
     for row in arr:
         for pix in row:
@@ -24,7 +24,6 @@ def calc_hist_per_channel(arr, intv, bins): # img numpy arr, intv: interval size
     hist_0 = np.zeros(bins)
     hist_1 = np.zeros(bins)
     hist_2 = np.zeros(bins)
-
     for row in arr:
         for pix in row:
             hist_0[pix[0]//intv] += 1
@@ -56,11 +55,11 @@ def calc_results_conf1(QS, S, intvs):
 
         # Normalize data corresponding to the configuration
         for s in S: # for each img in the support set
-            S_hists[s] = normalize_hist(calc_hist(S[s], inv, bins))
+            S_hists[s] = normalize_hist(calc_hist3d(S[s], inv, bins))
 
         for Q,Q_Res in zip(QS,QS_Res): # for each query
             for q in Q: # for each img in the query set
-                q_hist = normalize_hist(calc_hist(Q[q], inv, bins))
+                q_hist = normalize_hist(calc_hist3d(Q[q], inv, bins))
                 hist_diff = dict()
                 for s in S:
                     hist_diff[s] = KL_divg(q_hist, S_hists[s])
@@ -156,25 +155,46 @@ for inst in instance_names:
 
 QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 
+######################################################################################################
 # config-1, whole histogram 3D
 
 #intvs = [16, 32, 64, 128]
 
 #config_1_res = calc_results_conf1(QS, S, intvs)
 
-
+######################################################################################################
 # config-2, per channel histogram
 
-intvs = [8, 16, 32, 64, 128]
+# intvs = [8, 16, 32, 64, 128]
 
-config_2_res = calc_results_conf2(QS, S, intvs)
+# config_2_res = calc_results_conf2(QS, S, intvs)
 
+######################################################################################################
 # Part 3-5
 
-def partition_img(img, grid, M): 
-    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid)
-    height, width, depth = img.shape
-    P = img.reshape(grid, M, -1, grid, depth)
-    P = P.swapaxes(1,2)
-    P = P.reshape(-1,grid,grid,depth)
+def partition_img3d(img, grid, M): 
+    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid), returns list
+    h,w,d = img.shape
+    P = [img[i:i+grid,j:j+grid] for i in range(0,h,grid) for j in range(0,w,grid)]
     return P
+
+def partition_img2d(img, grid, M):  # I couldnt generalize into 3D, but I plan to update it if I can
+    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid)
+    height, width = img.shape
+    P = img.reshape(M, grid, M, grid)
+    P = P.swapaxes(1,2)
+    P = P.reshape(M*M,grid,grid)
+    return P
+
+grid_intvs = [48, 24, 16, 12]
+# pick best configs for 3d and per channel
+intv_3d = 64
+bins_3d = 256//intv_3d
+
+intv_per_ch = 32
+bins_per_ch = 256//intv_per_ch
+
+
+
+
+

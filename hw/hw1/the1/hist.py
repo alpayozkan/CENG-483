@@ -263,15 +263,17 @@ def partition_img2d(img, grid, M):  # I couldnt generalize into 3D, but I plan t
     return P
 
 grid_intvs = [48, 24, 16, 12]
+
 # pick best configs for 3d and per channel
-intv_3d = 64
-# bins_3d = 256//intv_3d
 
-intv_per_ch = 32
-# bins_per_ch = 256//intv_per_ch
+intvs_3d = [16, 32, 64, 128] # all
+inv_3d = 64 # best
 
-# config_3_res = calc_results_conf3(QS, S, grid_intvs, intv_3d)
-config_4_res = calc_results_conf4(QS, S, grid_intvs, intv_per_ch)
+intvs_per_ch = [8, 16, 32, 64, 128] # all
+inv_per_ch = 32 # best
+
+config_3_res = [calc_results_conf3(QS, S, grid_intvs, inv) for inv in intvs_3d]
+config_4_res = [calc_results_conf4(QS, S, grid_intvs, inv) for inv in intvs_per_ch]
 
 
-
+# butun interval lara bi bak

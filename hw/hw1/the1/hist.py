@@ -4,6 +4,21 @@ import copy
 
 delta = 1e-6
 
+def partition_img3d(img, grid): 
+    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid), returns list
+    h,w,d = img.shape
+    P = [img[i:i+grid,j:j+grid] for i in range(0,h,grid) for j in range(0,w,grid)]
+    # assert len(P)==(h/grid)*(w/grid)
+    return P
+
+def partition_img2d(img, grid, M):  # I couldnt generalize into 3D, but I plan to update it if I can
+    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid)
+    height, width = img.shape
+    P = img.reshape(M, grid, M, grid)
+    P = P.swapaxes(1,2)
+    P = P.reshape(M*M,grid,grid)
+    return P
+
 def normalize_hist(hist):
     s = np.sum(hist)
     return (hist/s)
@@ -14,7 +29,7 @@ def normalize_mult_hists(hists): # hists contains many histograms, np.ndarray
 def KL_divg(Q, S): # expects normalized distributions
     Q = np.ndarray.flatten(Q)
     S = np.ndarray.flatten(S)
-    return  np.sum(Q*np.log2((Q+delta)/(S+delta)))
+    return  np.sum(Q*np.log2((Q+delta)/(S+delta))) / len(Q) # avg KL divg per bin
 
 def calc_hist(arr, intv, bins, type): # generic hist function, type='3d' or 'per_channel'
     if type=='3d':
@@ -114,7 +129,7 @@ def calc_results_conf2(QS, S, intvs):
 
                 hist_diff = dict()
                 for s in S:
-                    hist_diff[s] = KL_divg(q_hist, S_hists[s])/len(q_hist) # avg divg over channels
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])
                 # get the best matching with lowest kl divg
                 argmin_hist = min(hist_diff, key=hist_diff.get)
                 min_hist = hist_diff[argmin_hist]
@@ -147,7 +162,7 @@ def calc_results_conf3(QS, S, grids, intv): # grids = [48,24,16,12] grids
                 
                 hist_diff = dict()
                 for s in S:
-                    hist_diff[s] = KL_divg(q_hist, S_hists[s])/len(q_hist) # avg divg over channels
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])
                 # get the best matching with lowest kl divg
                 argmin_hist = min(hist_diff, key=hist_diff.get)
                 min_hist = hist_diff[argmin_hist]
@@ -180,7 +195,7 @@ def calc_results_conf4(QS, S, grids, intv): # grids = [48,24,16,12] grids
                 
                 hist_diff = dict()
                 for s in S:
-                    hist_diff[s] = KL_divg(q_hist, S_hists[s])/len(q_hist) # avg divg over channels
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])
                 # get the best matching with lowest kl divg
                 argmin_hist = min(hist_diff, key=hist_diff.get)
                 min_hist = hist_diff[argmin_hist]
@@ -241,26 +256,14 @@ QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 ######################################################################################################
 # config-2, per channel histogram
 
-# intvs = [8, 16, 32, 64, 128]
+intvs = [8, 16, 32, 64, 128]
 
-# config_2_res = calc_results_conf2(QS, S, intvs)
+config_2_res = calc_results_conf2(QS, S, intvs)
 
 ######################################################################################################
 # Part 3-5
 
-def partition_img3d(img, grid): 
-    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid), returns list
-    h,w,d = img.shape
-    P = [img[i:i+grid,j:j+grid] for i in range(0,h,grid) for j in range(0,w,grid)]
-    return P
 
-def partition_img2d(img, grid, M):  # I couldnt generalize into 3D, but I plan to update it if I can
-    # partition (Mxgrid)x(Mxgrid) img into M x M pieces each (grid x grid)
-    height, width = img.shape
-    P = img.reshape(M, grid, M, grid)
-    P = P.swapaxes(1,2)
-    P = P.reshape(M*M,grid,grid)
-    return P
 
 grid_intvs = [48, 24, 16, 12]
 
@@ -272,8 +275,8 @@ inv_3d = 64 # best
 intvs_per_ch = [8, 16, 32, 64, 128] # all
 inv_per_ch = 32 # best
 
-config_3_res = [calc_results_conf3(QS, S, grid_intvs, inv) for inv in intvs_3d]
-config_4_res = [calc_results_conf4(QS, S, grid_intvs, inv) for inv in intvs_per_ch]
+# config_3_res = [calc_results_conf3(QS, S, grid_intvs, inv) for inv in intvs_3d]
+# config_4_res = [calc_results_conf4(QS, S, grid_intvs, inv) for inv in intvs_per_ch]
 
 
 # butun interval lara bi bak

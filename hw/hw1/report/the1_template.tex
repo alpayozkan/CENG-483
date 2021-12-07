@@ -299,11 +299,159 @@ Give your top-1 accuracy for all of the configurations below.
 
 \section{Additional Comments and References}
 
-(if there any)
+Additional Grid Based Feature Extraction for different intervals besides the best pick. \\
 
 
 
+\textbf{3D - Histogram} \\ 
 
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results 3D Grid histogram (intv=16)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.71 & 0.135 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.565 & 0.16 & 1.0 \\
+    \hline
+    16 x 16 & 1.0 & 0.545 & 0.215 & 1.0 \\
+    \hline
+    12 x 12 & 1.0 & 0.555 & 0.255 & 1.0 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results 3D Grid histogram (intv=32)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.655 & 0.15 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.425 & 0.155 & 1.0 \\
+    \hline
+    16 x 16 & 1.0 & 0.4 & 0.22 & 1.0 \\
+    \hline
+    12 x 12 & 1.0 & 0.39 & 0.245 & 1.0 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results 3D Grid histogram (intv=64)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.555 & 0.155 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.36 & 0.22 & 1.0 \\
+    \hline
+    16 x 16 & 1.0 & 0.3 & 0.255 & 1.0 \\
+    \hline
+    12 x 12 & 1.0 & 0.31 & 0.3 & 1.0 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results 3D Grid histogram (intv=128)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 0.995 & 0.28 & 0.15 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.195 & 0.24 & 1.0 \\
+    \hline
+    16 x 16 & 0.995 & 0.14 & 0.285 & 1.0 \\
+    \hline
+    12 x 12 & 1.0 & 0.145 & 0.34 & 1.0 \\
+    \hline
+\end{tabular}
+
+\pagebreak
+
+\textbf{Per-Channel Histogram} \\ 
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results Per-Channel Grid histogram (intv=8)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.355 & 0.215 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.16 & 0.22 & 1.0 \\
+    \hline
+    16 x 16 & 0.995 & 0.1 & 0.24 & 1.0 \\
+    \hline
+    12 x 12 & 0.995 & 0.1 & 0.24 & 1.0 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results Per-Channel Grid histogram (intv=16)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.365 & 0.21 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.17 & 0.225 & 1.0 \\
+    \hline
+    16 x 16 & 1.0 & 0.115 & 0.25 & 1.0 \\
+    \hline
+    12 x 12 & 0.995 & 0.11 & 0.245 & 1.0 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results Per-Channel Grid histogram (intv=32)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.36 & 0.22 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.205 & 0.26 & 1.0 \\
+    \hline
+    16 x 16 & 1.0 & 0.13 & 0.27 & 1.0 \\
+    \hline
+    12 x 12 & 0.995 & 0.1 & 0.265 & 1.0 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results Per-Channel Grid histogram (intv=64)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 1.0 & 0.33 & 0.235 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.2 & 0.315 & 1.0 \\
+    \hline
+    16 x 16 & 0.995 & 0.125 & 0.315 & 1.0 \\
+    \hline
+    12 x 12 & 0.995 & 0.1 & 0.305 & 1.0 \\
+    \hline
+\end{tabular}
+
+\begin{tabular}{ |p{1.5cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|  }
+    \hline
+    \multicolumn{5}{|c|}{Results Per-Channel Grid histogram (intv=128)} \\
+    \hline
+    Grid & Query-1 & Query-2 & Query-3 & Support \\
+    \hline
+    48 x 48 & 0.97 & 0.175 & 0.21 & 1.0 \\
+    \hline
+    24 x 24 & 1.0 & 0.125 & 0.355 & 1.0 \\
+    \hline
+    16 x 16 & 0.985 & 0.1 & 0.395 & 1.0 \\
+    \hline
+    12 x 12 & 0.98 & 0.065 & 0.405 & 1.0 \\
+    \hline
+\end{tabular}
 
 \end{document}
 

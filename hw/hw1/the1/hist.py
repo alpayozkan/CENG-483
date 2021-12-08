@@ -145,6 +145,7 @@ def calc_results_conf3(QS, S, grids, intv): # grids = [48,24,16,12] grids
     Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
     QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
 
+    grids = [96/x for x in grids] # MY BUG: 48x48 doesnt mean grids of size 48, it means 48x48 grids each 2x2
     acc_qnt_qry = [[] for i in range(len(grids))]
     
     bins = 256//intv
@@ -178,6 +179,7 @@ def calc_results_conf4(QS, S, grids, intv): # grids = [48,24,16,12] grids
     Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
     QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
 
+    grids = [96/x for x in grids] # MY BUG: 48x48 doesnt mean grids of size 48, it means 48x48 grids each 2x2
     acc_qnt_qry = [[] for i in range(len(grids))]
     
     bins = 256//intv
@@ -205,6 +207,80 @@ def calc_results_conf4(QS, S, grids, intv): # grids = [48,24,16,12] grids
             acc = top1_acc(Q_Res)
             acc_query.append(acc)
     return acc_qnt_qry
+
+def calc_results_conf5(QS, S, grids, intvs): # grids = [48,24,16,12] grids
+    # store results for each query set
+    Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
+    QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
+
+    grids = [96//x for x in grids] # MY BUG: 48x48 doesnt mean grids of size 48, it means 48x48 grids each 2x2
+    acc_qnt_qry = [[] for i in range(len(grids))]
+    
+    
+
+    for grid,acc_query in zip(grids, acc_qnt_qry):
+        S_hists = dict()
+        
+        # Normalize data corresponding to the configuration
+        
+
+        for Q,Q_Res,intv in zip(QS,QS_Res,intvs): # for each query
+            bins = 256//intv
+            for s in S: # for each img in the support set
+                S_hists[s] = calc_hist_grid_3d(S[s], intv, bins, grid)
+            for q in Q: # for each img in the query set
+                q_hist = calc_hist_grid_3d(Q[q], intv, bins, grid)
+                
+                hist_diff = dict()
+                for s in S:
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])
+                # get the best matching with lowest kl divg
+                argmin_hist = min(hist_diff, key=hist_diff.get)
+                min_hist = hist_diff[argmin_hist]
+                # store the matching
+                Q_Res[q] = (argmin_hist, min_hist)
+            # calculate acc for the query-i
+            acc = top1_acc(Q_Res)
+            acc_query.append(acc)
+    return acc_qnt_qry
+
+def calc_results_conf6(QS, S, grids, intvs): # grids = [48,24,16,12] grids
+    # store results for each query set
+    Q1_Res,Q2_Res,Q3_Res,S_Res = dict(),dict(),dict(),dict()
+    QS_Res = [Q1_Res, Q2_Res, Q3_Res, S_Res]
+
+    grids = [96//x for x in grids] # MY BUG: 48x48 doesnt mean grids of size 48, it means 48x48 grids each 2x2
+    acc_qnt_qry = [[] for i in range(len(grids))]
+    
+    
+
+    for grid,acc_query in zip(grids, acc_qnt_qry):
+        S_hists = dict()
+        
+        # Normalize data corresponding to the configuration
+        
+
+        for Q,Q_Res,intv in zip(QS,QS_Res,intvs): # for each query
+            bins = 256//intv
+            for s in S: # for each img in the support set
+                S_hists[s] = calc_hist_grid_per_channel(S[s], intv, bins, grid)
+            for q in Q: # for each img in the query set
+                q_hist = calc_hist_grid_per_channel(Q[q], intv, bins, grid)
+                
+                hist_diff = dict()
+                for s in S:
+                    hist_diff[s] = KL_divg(q_hist, S_hists[s])
+                # get the best matching with lowest kl divg
+                argmin_hist = min(hist_diff, key=hist_diff.get)
+                min_hist = hist_diff[argmin_hist]
+                # store the matching
+                Q_Res[q] = (argmin_hist, min_hist)
+            # calculate acc for the query-i
+            acc = top1_acc(Q_Res)
+            acc_query.append(acc)
+    return acc_qnt_qry
+
+
 
 root_dir = '../dataset/'
 
@@ -256,9 +332,9 @@ QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 ######################################################################################################
 # config-2, per channel histogram
 
-intvs = [8, 16, 32, 64, 128]
+# intvs = [8, 16, 32, 64, 128]
 
-config_2_res = calc_results_conf2(QS, S, intvs)
+# config_2_res = calc_results_conf2(QS, S, intvs)
 
 ######################################################################################################
 # Part 3-5
@@ -268,14 +344,21 @@ config_2_res = calc_results_conf2(QS, S, intvs)
 grid_intvs = [48, 24, 16, 12]
 
 # pick best configs for 3d and per channel
+intvs_3d_best =     [16,16,64,16]   # q1,q2,q3,s
+intvs_color_best =  [8,8,64,8]      # q1,q2,q3,s
 
-intvs_3d = [16, 32, 64, 128] # all
-inv_3d = 64 # best
 
-intvs_per_ch = [8, 16, 32, 64, 128] # all
-inv_per_ch = 32 # best
+# config_3_res_3d_1 = calc_results_conf5(QS, S, [48], intvs_3d_best)
+config_3_res_3d_2 = calc_results_conf5(QS, S, [24], intvs_3d_best)
+# config_3_res_3d_3 = calc_results_conf5(QS, S, [16], intvs_3d_best)
+# config_3_res_3d_4 = calc_results_conf5(QS, S, [12], intvs_3d_best)
 
-# config_3_res = [calc_results_conf3(QS, S, grid_intvs, inv) for inv in intvs_3d]
+# config_3_res_3d = calc_results_conf5(QS, S, [1], intvs_3d_best)
+# config_3_res_color = calc_results_conf6(QS, S, [1], intvs_color_best)
+
+# config_3_res_3d = calc_results_conf5(QS, S, grid_intvs, intvs_3d_best)
+# config_3_res_color = calc_results_conf6(QS, S, grid_intvs, intvs_color_best)
+
 # config_4_res = [calc_results_conf4(QS, S, grid_intvs, inv) for inv in intvs_per_ch]
 
 

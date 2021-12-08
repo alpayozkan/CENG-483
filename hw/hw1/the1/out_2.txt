@@ -13,7 +13,8 @@
 [[1.0, 1.0, 0.12, 1.0]] 1x1   => matches part-1 ok
 
 
-
+intvs_3d_best =     [16,16,64,16]   # q1,q2,q3,s
+intvs_color_best =  [8,8,64,8]      # q1,q2,q3,s
 
 
 

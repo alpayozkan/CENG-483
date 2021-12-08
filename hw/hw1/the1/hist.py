@@ -348,8 +348,8 @@ intvs_3d_best =     [16,16,64,16]   # q1,q2,q3,s
 intvs_color_best =  [8,8,64,8]      # q1,q2,q3,s
 
 
-# config_3_res_3d_1 = calc_results_conf5(QS, S, [48], intvs_3d_best)
-config_3_res_3d_2 = calc_results_conf5(QS, S, [24], intvs_3d_best)
+config_3_res_3d_1 = calc_results_conf5(QS, S, [48], intvs_3d_best)
+# config_3_res_3d_2 = calc_results_conf5(QS, S, [24], intvs_3d_best)
 # config_3_res_3d_3 = calc_results_conf5(QS, S, [16], intvs_3d_best)
 # config_3_res_3d_4 = calc_results_conf5(QS, S, [12], intvs_3d_best)
 

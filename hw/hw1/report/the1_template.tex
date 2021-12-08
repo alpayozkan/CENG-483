@@ -101,22 +101,29 @@ In this section, give your results without dividing the images into grids. Your 
 \vspace{1cm}
 
 
-Query-1 dataset includes the same images as in Support dataset, but it's scaled up (zoomed in), 
-birds are larger in the pictures.
-Since scaling is not very extreme, histogram was sucessfull to capture the essential
+Query-1 dataset includes scaled versions of images in Support dataset, 
+ie. birds are larger in the pictures.
+Since scaling is not very extreme, histogram was sucessful to capture the essential
 pixel distribution for matching the pictures. Query-1 is perfectly detected for all interval sizes 
 except for (128x2) which has larger interval size corresponding to lower spatiality 
-in terms of pixel values. However, 0.935 of accuracy is still successfull in Query-1.
+in terms of pixel values. However, 0.935 of accuracy can still be considered as successfull in Query-1.
+For intv=128, there is actually a problem and it would be even much severe for the case of intv$>$128 or intv=256 for the extreme case.
+It's because of the fact that, scaling up emphasizes bird pixels more, namely there are more bird pixels 
+rather than background pixels as in the Support set. Increasing the interval size 
+decreases the number of bins that pixels can be matched with, hence increasing the difference between
+support and query-1 as a result of the different pixel density between bird and background.
 
 Query-2 dataset also includes the same images, but with rotations (90, 180, 270 degrees).
 Since we are calculating histogram for the full image without any spatial partitions/grids
 and it only counts for the frequencies of pixel values, histogram is invariant to rotation in this case.
 Therefore, as expected Query-2 set perfectly matches to Support set.
+Note that, in query-2 increasing interval size doesn't decrease the performance because pixel density 
+between bird and background is the same for both rotated and original sets.
 
 Query-3 dataset is composed of same images as in Support dataset without rotation or scaling,
 but different transformations are applied on these images altering the pixel values. 
 For example, American Pipit turns into yellow from brown. Those transformations might 
-be contrast and hue transformations which can change the pixel values. 
+be contrast and hue transformations which can alter the pixel values. 
 As it's clear from the Query-3 set, applying an entire histogram over images wouldn't be sufficient 
 to capture its correspondance in Support set. Altough semantically the images correspond to the 
 same  entity, modified pixel values deviate/fool our full histogram approach resulting in poor accuracies
@@ -155,8 +162,42 @@ In this section, give your results without dividing the images into grids.
 
 \vspace{1cm}
 
+Overall accuracies are worse than 3D histogram. This is expected because
+3D histogram can represent more color combinations, preserving color value spatiality.
+For example, for intv=16 3D histogram has 16x16x16=4096 bins for (R,G,B) to associate pixels
+whereas per-channel histogram has 16 bins for each channel (R/G/B). In configurations with decreased bin size
+we expect less accuracy because pixels will be associated/mapped with less choices
+causing in a sense information loss. The extreme case would be only 1 bin per channel
+which can be easily fooled, because every histogram will be the same 
+(each pixel fits into 0-255 interval for each channel) regardless of the input 
+that generated that histogram.
 
-\newpage
+Overall accuracies decrease for all queries as interval size increases 
+as a result decreasing spatial or local color characteristics.
+
+Query-1 accuracy decreases dramatically for intv=128 with similar reasoning 
+as in 3D histograms background and bird pixel density. However, it decreases
+much severely compared to 3D histogram which is due to color histogram's weakness
+for less color spatiality.
+
+Query-2 results are all almost correct except for the intv=128 which was 
+1.0 in 3D histogram. Once again, per-channel histograms accuracy starts to decrease earlier
+than 3D histogram's. If we had 256x1 configuration, accuracy loss would be much more dramatic.
+Query-2 accuracies are higher than Query-1's because of the fact that 
+Query-2 includes the same pixels as in Support set, whereas Query-1 has
+more bird pixels which doesn't help the accuracy because our base is Support set
+with which we measure its KL divergence or distribution similarity.
+
+Query-3 results are still very low, mainly due to the same reasoning 
+as in 3D histogram for this case. In short, pixel values are significantly different.
+For example, some images are darkened and some brightened: contrast, and hue transformations.
+These transformations assign pixels different bins compared to support set's.
+Compared to 3D histogram both methods more or less fail around similar orders of magnitude.
+However, for this case spatial partitions on images can make a difference which I suspect
+will increase our representation power in the sense that parts of different images
+will have more unlikely similarities when cumulated in a histogram.
+
+
 \textbf{Before starting the next section, please pick up the best configuration for two properties above and continue with them.}
 
 \section{Grid Based Feature Extraction - Query set 1}

@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1638987014 "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.tex" "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.pdf" "the1_template" 1638987015
+["pdflatex"] 1638994790 "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.tex" "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.pdf" "the1_template" 1638995356
   "/etc/texmf/web2c/texmf.cnf" 1588930188 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.aux" 1638987015 3396 ac263bf8003bd4117d024d122685e1e7 ""
-  "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.tex" 1638987013 16530 6a6a9a2a7385d72b1cbd76cf5fbff926 ""
+  "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.aux" 1638994791 3396 3e11aa7db7622ab879114dff65d5b004 ""
+  "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.tex" 1638995356 19289 fabd4d6e2ae0214e36b3d8eeb63b431b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -114,13 +114,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1634069332 4770781 1ed1abab22da9c3e2cc82e4db562318b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1634069355 8255950 3bc6086d7f4b2e4a00925faa58232926 ""
-  "the1_template.aux" 1638987015 3396 ac263bf8003bd4117d024d122685e1e7 "pdflatex"
-  "the1_template.out" 1638987015 1396 6f62647345ee81e1a71512070fbe615a "pdflatex"
-  "the1_template.tex" 1638987013 16530 6a6a9a2a7385d72b1cbd76cf5fbff926 ""
+  "the1_template.aux" 1638994791 3396 3e11aa7db7622ab879114dff65d5b004 "pdflatex"
+  "the1_template.out" 1638994791 1396 6f62647345ee81e1a71512070fbe615a "pdflatex"
+  "the1_template.tex" 1638995356 19289 fabd4d6e2ae0214e36b3d8eeb63b431b ""
   (generated)
-  "the1_template.log"
-  "the1_template.pdf"
+  "the1_template.aux"
   "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.log"
   "/home/pumpkin/.git/CENG-483/hw/hw1/report/the1_template.pdf"
-  "the1_template.aux"
+  "the1_template.pdf"
+  "the1_template.log"
   "the1_template.out"

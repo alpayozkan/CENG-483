@@ -256,27 +256,25 @@ QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 ######################################################################################################
 # config-2, per channel histogram
 
-intvs = [8, 16, 32, 64, 128]
+# intvs = [8, 16, 32, 64, 128]
 
-config_2_res = calc_results_conf2(QS, S, intvs)
+# config_2_res = calc_results_conf2(QS, S, intvs)
 
 ######################################################################################################
 # Part 3-5
 
 
 
-grid_intvs = [48, 24, 16, 12]
+grid_intvs = [96,48, 24, 16, 12]
 
 # pick best configs for 3d and per channel
 
 intvs_3d = [16, 32, 64, 128] # all
-inv_3d = 64 # best
 
 intvs_per_ch = [8, 16, 32, 64, 128] # all
-inv_per_ch = 32 # best
 
-# config_3_res = [calc_results_conf3(QS, S, grid_intvs, inv) for inv in intvs_3d]
-# config_4_res = [calc_results_conf4(QS, S, grid_intvs, inv) for inv in intvs_per_ch]
+config_3_res = [calc_results_conf3(QS, S, grid_intvs, inv) for inv in intvs_3d]
+config_4_res = [calc_results_conf4(QS, S, grid_intvs, inv) for inv in intvs_per_ch]
 
 
 # butun interval lara bi bak

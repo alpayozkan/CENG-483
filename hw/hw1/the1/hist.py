@@ -249,16 +249,16 @@ QS = [Q_1, Q_2, Q_3, copy.deepcopy(S)]
 ######################################################################################################
 # config-1, whole histogram 3D
 
-#intvs = [16, 32, 64, 128]
+intvs = [16, 32, 64, 128]
 
-#config_1_res = calc_results_conf1(QS, S, intvs)
+config_1_res = calc_results_conf1(QS, S, intvs)
 
 ######################################################################################################
 # config-2, per channel histogram
 
-# intvs = [8, 16, 32, 64, 128]
+intvs = [8, 16, 32, 64, 128]
 
-# config_2_res = calc_results_conf2(QS, S, intvs)
+config_2_res = calc_results_conf2(QS, S, intvs)
 
 ######################################################################################################
 # Part 3-5

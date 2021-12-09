@@ -105,8 +105,8 @@ Query-1 dataset includes scaled versions of images in Support dataset,
 ie. birds are larger in the pictures.
 Since scaling is not very extreme, histogram was sucessful to capture the essential
 pixel distribution for matching the pictures. Query-1 is perfectly detected for all interval sizes 
-except for (128x2) which has larger interval size corresponding to lower spatiality 
-in terms of pixel values. However, 0.935 of accuracy can still be considered as successfull in Query-1.
+except for (128x2) which has larger interval size corresponding to lower spatiality \ref{CVS}
+in terms of pixel color values. However, 0.935 of accuracy can still be considered as successfull in Query-1.
 For intv=128, there is actually a problem and it would be even much severe for the case of intv$>$128 or intv=256 for the extreme case.
 It's because of the fact that, scaling up emphasizes bird pixels more, namely there are more bird pixels 
 rather than background pixels as in the Support set. Increasing the interval size 
@@ -114,7 +114,7 @@ decreases the number of bins that pixels can be matched with, hence increasing t
 support and query-1 as a result of the different pixel density between bird and background.
 
 Query-2 dataset also includes the same images, but with rotations (90, 180, 270 degrees).
-Since we are calculating histogram for the full image without any spatial partitions/grids
+Since we are calculating histogram for the full image without any regional spatial partitions/grids \ref{RS}
 and it only counts for the frequencies of pixel values, histogram is invariant to rotation in this case.
 Therefore, as expected Query-2 set perfectly matches to Support set.
 Note that, in query-2 increasing interval size doesn't decrease the performance because pixel density 
@@ -163,7 +163,7 @@ In this section, give your results without dividing the images into grids.
 \vspace{1cm}
 
 Overall accuracies are worse than 3D histogram. This is expected because
-3D histogram can represent more color combinations, preserving color value spatiality.
+3D histogram can represent more color combinations, preserving color value spatiality \ref{CVS}.
 For example, for intv=16 3D histogram has 16x16x16=4096 bins for (R,G,B) to associate pixels
 whereas per-channel histogram has 16 bins for each channel (R/G/B). In configurations with decreased bin size
 we expect less accuracy because pixels will be associated/mapped with less choices
@@ -173,7 +173,7 @@ which can be easily fooled, because every histogram will be the same
 that generated that histogram.
 
 Overall accuracies decrease for all queries as interval size increases 
-as a result decreasing spatial or local color characteristics.
+as a result decreasing spatial \ref{CVS} or local color representation power.
 
 Query-1 accuracy decreases dramatically for intv=128 with similar reasoning 
 as in 3D histograms background and bird pixel density. However, it decreases
@@ -193,7 +193,7 @@ as in 3D histogram for this case. In short, pixel values are significantly diffe
 For example, some images are darkened and some brightened: contrast, and hue transformations.
 These transformations assign pixels different bins compared to support set's.
 Compared to 3D histogram both methods more or less fail around similar orders of magnitude.
-However, for this case spatial partitions on images can make a difference which I suspect
+However, for this case spatial partitions \ref{RS} on images can make a difference which I suspect
 will increase our representation power in the sense that parts of different images
 will have more unlikely similarities when cumulated in a histogram.
 
@@ -260,7 +260,8 @@ from 0.98 $->$ 1.0 which I believe is an improvement for per-channel histograms.
 The reason why grids improve accuracy in per-channel histograms is because of the spatiality.
 In other words, histograms corresponding to each partitions of the images 
 will be more unlikely to be matched with wrong images. Because it doesn't decrease its
-accuracy for the correct image. These grids are actually the subsets of the whole histogram 
+accuracy for the correct image, but for the wrong images smaller spatial partitions are more unlikely to be similar
+than cumulated or larger partitions ie. 96x96 (whole histogram). These grids are actually the subsets of the whole histogram 
 and if cumulated we can obtain the original result for 96x96.
 However, the situation would be totally different if there were transformations different than only scaling ie. rotation etc. 
 
@@ -272,7 +273,7 @@ as an extreme case 1x1 grids correspond to 1 pixel partitions which corresponds 
 histograms with less points or it can also be interpreted as 1 to 1 pixel checking.
 It wouldn't be a vigorous method, because query-1 contains scaled images which wouldn't 
 perfectly match with Support set. Therefore, I would consider grid size as a hyperparameter
-which should be tuned in [1,96]. Once again 3D histograms are more vigorous even in the case of
+which should be tuned between [1,96]. Once again 3D histograms are more vigorous even in the case of
 grid-based approach due to its stronger representation power. However, its accuracy should also decrease as
 grid size gets smaller and smaller.
 % grid ler cok kuculurse acc dusmesi beklenir for both methods
@@ -310,42 +311,52 @@ Give your top-1 accuracy for all of the configurations below.
 \item Explain the advantages/disadvantages of using grids in both types of histograms if there are any.
 \end{itemize}
 
-Firstly, overall I can observe that in query-1 partitioning has always decreased the accuracy 
+Firstly, overall I can observe that in query-2 partitioning has always decreased the accuracy 
 for both 3d and per channel histograms. This is an expected behavior, because in query-2
 the images are rotated and when these images are partitioned their correspondance
 in support set would be totally different. For example, a crook has been turned upside down
 hence its foot pixels are matched with its head pixels which wouldn't construct a vigorous
-method for prediction and we this failure in our results.
+method for prediction and we observe this failure in our poor results.
 
-As it's clear from the reasoning above, partitioning is disadvantageous for query-2 or more generally for
-images including rotation based transformations. However, one thing to notice that
-per-channel histogram is more fragile compared to 3d histogram. This can be? % burda kaldik
+As it's clear from the reasoning above, partitioning is disadvantageous with 3D and per-channel histograms for query-2 or more generally for
+images including rotation based transformations. 
+
+Additionally, we can observe that as spatial grid size gets smaller accuracy decreases for both 3D and per-channel histograms and it would go much lower if spatial grid size approaches 1x1,
+this is because of the fact that when we apply rotation and decrease the grid size the relevant parts of the images are less likely to overlap
+causing totally different histogram distributions.
+
+Another thing to notice that per-channel histogram is more fragile and has lost accuracy much more dramatically compared to 3d histogram. 
+This difference is once again because of the more representation power of 3D histogram over per-channel histogram.
+If we consider this situation in the context of Query-2, we can observe that 3D color histograms perform better
+because the similarity between the rotated image and the original image is represented in a more detailed manner,
+namely if some pixel parts in the partitioned grids match, this makes prediction easier compared to
+per-channel histogram which wouldn't instead pay that much attention for color spatiality in other words specific color combinations.
 
 \section{Grid Based Feature Extraction - Query set 3}
 Give your top-1 accuracy for all of the configurations below.
 
 \subsection{$48\times48$ spatial grid}
 \begin{itemize}
-\item 3d color histogram:
-\item per-channel histogram:
+\item 3d color histogram: 0.155
+\item per-channel histogram: 0.235
 \end{itemize}
 
 \subsection{$24\times24$ spatial grid}
 \begin{itemize}
-\item 3d color histogram:
-\item per-channel histogram:
+\item 3d color histogram: 0.22
+\item per-channel histogram: 0.315
 \end{itemize}
 
 \subsection{$16\times16$ spatial grid}
 \begin{itemize}
-\item 3d color histogram:
-\item per-channel histogram:
+\item 3d color histogram: 0.255
+\item per-channel histogram: 0.315
 \end{itemize}
 
 \subsection{$12\times12$ spatial grid}
 \begin{itemize}
-\item 3d color histogram:
-\item per-channel histogram:
+\item 3d color histogram: 0.3
+\item per-channel histogram: 0.305
 \end{itemize}
 
 \subsection{Questions}
@@ -355,9 +366,69 @@ Give your top-1 accuracy for all of the configurations below.
 \end{itemize}
 
 
+
+
+% In query-3 there is some noise applied on top of the Support set.
+Overall we can observe that for both 3D and per-channel histogram methods Query-3 accuracies are around 3 times better compared to previous approaches without any spatial partitions.
+Firstly, this behavior is no surprise, because it comes from the characteristics of query-3 which basically has some 
+contrast/hue transformation or noise applied on top of the original set. Hence, full histogram approaches are vulnerable, because
+histograms from the modified pixel values doesn't vigorously match to histograms of the original set.
+Hence, in query-3 partitioning is advantageous for both 3D and per-channel histograms which
+improves matching the relevant parts of the images in other words intensifiyng the similarity in lower levels of 
+image partitions as a result denoising image predictions up to a certain extent.
+For example, noisy image partition containing beak of the bird will be more likely to be matched with the
+image partition containing the original beak of the bird. Altough the partition is noisy, 
+it would be more likely (compared to previous approaches) to be matched with the relevant
+partitions probably partitions with beaks which is expected to be more similar compared to let's say
+feet of the bird if the noise is approximately or assumed to be uniform across the entire image.
+
+However, different than our previous experiments in grid based methods,
+we can observe that for both 3D and per-channel histograms accuracies has increased 
+generally (except for 12x12 for per channel histogram) as spatial grid size decreases. 
+This seems like the general trend, because as we decrease grid size or ie. increase positional spatiality,
+different images will be even more unlikely to be matched with, because apart from the noise applied on top
+of the image, the underlying pixels would likely to be matched with the original one's.
+Noise applied on a smaller region would have less severe effect on deviating our histogram's predictions.
+
+Additionally, different than our previous observations, in this case we observe that 
+per-channel histogram performs better than 3D histogram and it cannot be a lucky coincidence.
+This phenomena is because of per-channel histograms' less representation power
+which in a way smoothens histogram values when data is noisy, however 3D histograms try to represent
+it in a more detailed and sparse manner which is more vulnerable to noise or pixel value alterations.
+For example, pixel values in 3D histograms will be gathered around a far different space region 
+under considerable amount of noise compared to its region at the original pixel value space which results in less distribution similarity. 
+In query-3 or for noisy inputs cumulative or smoothened approaches like per-channel histogram is more vigorous than detailed representations like 3D histograms.
+
+
+% why accuracy increases as spatial grid size decreases
+% why per-channel is better than 3D
+% query-3 icin per channel in daha iyi calismasi mantikli
+% cunku cok noise var powerful veya cok color bazinda spatial representation 
+% li model 3D histogram i kullanmak yerine daha smooth per-channel kullanmak daha mantikli
+% color value bazinda smooth lastiriyor gibi oluyor, gaussian filter ina benzetiyorum biraz
+% noise a karsi daha vigorous
+
 \section{Additional Comments and References}
 
+% briefly mention what I mean by spatial color values, I used that terminology several times in the report.
+% positional spatiality vs color spatiality
+Just to make the analysis in the report more clear. I would like to briefly explain some of the terminologies 
+that I've used to remove ambiguity if there are any.
+
+I've used "spatiality" in different contexts. \\
+
+\textbf{Regional/Positional Spatiality} \label{RS}: pixels associated with respect to the distance.
+For example, using grids in histograms to intensify local pixel characteristics. \\
+
+\textbf{Color Value Spatiality} \label{CVS}: pixels associated with respect to color value.
+For example, increasing number of bins in either 3D or per-channel histogram would
+increase the spatiality in terms of color values.
+
+
+\newpage
+
 Additional Grid Based Feature Extraction for different intervals besides the best pick. \\
+
 
 
 

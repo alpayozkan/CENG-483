@@ -58,7 +58,7 @@ for training_name in training_names:
 des_list = []
 
 #BRISK is a good replacement to SIFT. ORB also works but didn;t work well for this example
-sift = cv2.SIFT_create(30)
+sift = cv2.xfeatures2d.SIFT_create(30)
 
 for image_path in image_paths:
     im = cv2.imread(image_path)

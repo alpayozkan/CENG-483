@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1641554583 "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.tex" "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.pdf" "template" 1641554584
+["pdflatex"] 1641554583 "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.tex" "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.pdf" "template" 1641626691
   "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.aux" 1641554584 1178 1537593e449e1fc6337d1132ee35c856 ""
   "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.tex" 1640550946 4449 6cb73e4fbcab0fa43cd188bc9dc0a0ab ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -119,9 +119,9 @@
   "template.out" 1641554584 746 d7b22c53d15a9dd4518c9f87a8014dc0 "pdflatex"
   "template.tex" 1640550946 4449 6cb73e4fbcab0fa43cd188bc9dc0a0ab ""
   (generated)
-  "template.log"
-  "template.pdf"
-  "template.out"
   "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.pdf"
   "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.log"
+  "template.out"
+  "template.pdf"
+  "template.log"
   "template.aux"

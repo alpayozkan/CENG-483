@@ -48,15 +48,27 @@ for c in class_ids:
 desc_stack = np.vstack([dsc[2] for dsc in desc_imgs])
 
 # k-means cluster desc_stack => sift vector vocab/dictionary
-from scipy.cluster.vq import kmeans
+# cluster-center dictionary
+from scipy.cluster.vq import kmeans, vq
 k = 30
 iters = 20
 codebook, dist = kmeans(desc_stack, k, iters)
 
 # create bow representation
+# BOF extraction
 N = len(desc_imgs) # 6000, number of imgs in train set
 
 bow_repr = np.zeros((N, k), dtype=np.float32)
-for desc in desc_imgs:
-    bow_words, bow_dist = # nearest neighbor implementaiton
+for i,desc in enumerate(desc_imgs):
+    bow_words, bow_dist = vq(desc[2], codebook) # nearest neighbor implementaiton, own implementation or just 1-nn, en yakin centroid
+    for word in bow_words: # for each word of bow repr of img
+        bow_repr[i][word] += 1 # count number of words selected from bow centroid vectors
 
+# normalize bow histogram
+from sklearn.preprocessing import StandardScaler
+bow_repr_normd = StandardScaler().fit(bow_repr).transform(bow_repr)
+# BOF database i bu oluyor? train img lardan elde edildi
+
+
+# TODO
+# test img lari al => sift vector => BOF extract et => k-nn arasindan train BOF database ine gore dominate eden class i sec

@@ -13,7 +13,6 @@ classes = sorted(os.listdir(train_path))
 class_ids = dict({s: c for c,s in enumerate(classes)})
 # class_ids["NOT_FOUND"] = -1
 
-
 #sift = cv2.xfeatures2d.SIFT_create(20)
 sift = cv2.SIFT_create(contrastThreshold=0.001)
 
@@ -51,8 +50,8 @@ desc_stack = np.vstack([dsc[2] for dsc in desc_imgs])
 # k-means cluster desc_stack => sift vector vocab/dictionary
 # cluster-center dictionary
 from scipy.cluster.vq import kmeans, vq
-k = 15 # 3 dk surdu
-iters = 2
+k = 128 # 3 dk surdu
+iters = 5
 codebook, dist = kmeans(desc_stack, k, iters)
 
 
@@ -101,7 +100,7 @@ N = len(desc_imgs) # 6000, number of imgs in train set 15x400=6000
 bow_repr = np.zeros((N, k), dtype=np.float32)
 for i,desc in enumerate(desc_imgs):
     # bow_words, bow_dist = vq(desc[2], codebook) # nearest neighbor implementaiton, own implementation or just 1-nn, en yakin centroid
-    bow_words = knn(codebook, desc[2], k=1, dmetricid=1)
+    bow_words = knn(codebook, desc[2], k=1, dmetric_id=1)
     bow_words = [x[0][0] for x in bow_words]
     for word in bow_words: # for each word of bow repr of img
         bow_repr[i][word] += 1  # count number of words selected from bow centroid vectors
@@ -112,7 +111,7 @@ for i,desc in enumerate(desc_imgs):
 #from sklearn.preprocessing import StandardScaler
 #bow_repr_normd = StandardScaler().fit(bow_repr).transform(bow_repr)
 bow_repr_norms = np.linalg.norm(bow_repr,1,axis=1)
-bow_repr_normzd = (bow_repr/bow_repr_norms[:,None])
+bow_repr_normzd = (bow_repr/bow_repr_norms[:,None]) # (6000,15)
 # train her bir img icin bow normalized histogramlari
 
 # BOF database i bu oluyor, train img lardan elde edildi
@@ -149,8 +148,13 @@ for c in class_ids:
 
 # Extract bow representations of test imgs
 N_test = len(desc_imgs_test) # 1500, number of imgs in test set 15x100
-k_nn = 8
-test_acc = dict({s: (0,0) for s in classes}) # class: (correct, total)
+k_nn = 15
+
+train_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
+train_acc[-1] = [0,0] # NOT-FOUND class
+
+test_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
+test_acc[-1] = [0,0] # NOT-FOUND class
 
 bow_repr_test = np.zeros((N_test, k), dtype=np.float32)
 for i,desc in enumerate(desc_imgs_test):
@@ -163,11 +167,31 @@ for i,desc in enumerate(desc_imgs_test):
 
 # normalize test histograms
 bow_repr_test_norms = np.linalg.norm(bow_repr_test,1,axis=1)
-bow_repr_test_normzd = (bow_repr_test/bow_repr_test_norms[:,None])
+bow_repr_test_normzd = (bow_repr_test/bow_repr_test_norms[:,None]) # (1500,15)
 
 # compare test set against train set
 # approx 1-2 min
-test_preds = knn(bow_repr_normzd, bow_repr_test_normzd, k=k_nn, dmetric_id=1)
+train_preds = knn(bow_repr_normzd, bow_repr_normzd, k=k_nn, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db 
+test_preds = knn(bow_repr_normzd, bow_repr_test_normzd, k=k_nn, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db
 
+# TRAIN ACC.
+# takes too much time, deactivate this block unless debugging
+# vote wrt closest nns and generate class predictions
+for i,desc in enumerate(desc_imgs):
+    voted_imgs = [x[0] for x in train_preds[i]]
+    voted_classes = [desc_imgs[x][0] for x in voted_imgs]
+    prediction = max(set(voted_classes), key=voted_classes.count) # selects the most frequent/repeated class with democracy
+    ground_truth = desc_imgs[i][0]
+    train_acc[ground_truth][0] += (prediction==ground_truth)
+    train_acc[ground_truth][1] += 1
+
+# TEST ACC.
 # vote wrt closest nns and generate class predictions
 for i,desc in enumerate(desc_imgs_test):
+    voted_imgs = [x[0] for x in test_preds[i]]
+    voted_classes = [desc_imgs[x][0] for x in voted_imgs]
+    prediction = max(set(voted_classes), key=voted_classes.count) # selects the most frequent/repeated class with democracy
+    ground_truth = desc_imgs_test[i][0]
+    test_acc[ground_truth][0] += (prediction==ground_truth)
+    test_acc[ground_truth][1] += 1
+

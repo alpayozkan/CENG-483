@@ -13,8 +13,15 @@ classes = sorted(os.listdir(train_path))
 class_ids = dict({s: c for c,s in enumerate(classes)})
 # class_ids["NOT_FOUND"] = -1
 
-#sift = cv2.xfeatures2d.SIFT_create(20)
-sift = cv2.SIFT_create(contrastThreshold=0.001)
+def custom_sift(sift, img, is_dense=False, grid_size=1):
+    if is_dense:
+        kp_grids = [cv2.KeyPoint(x, y, grid_size) for y in range(0, img.shape[0], grid_size) for x in range(0, img.shape[1], grid_size)]
+        return sift.compute(img, kp_grids)
+    else:
+        return sift.detectAndCompute(img, None)
+
+sift = cv2.xfeatures2d.SIFT_create()
+# sift = cv2.SIFT_create(contrastThreshold=0.001)
 
 desc_imgs = []
 
@@ -100,8 +107,8 @@ N = len(desc_imgs) # 6000, number of imgs in train set 15x400=6000
 bow_repr = np.zeros((N, k), dtype=np.float32)
 for i,desc in enumerate(desc_imgs):
     # bow_words, bow_dist = vq(desc[2], codebook) # nearest neighbor implementaiton, own implementation or just 1-nn, en yakin centroid
-    bow_words = knn(codebook, desc[2], k=1, dmetric_id=1)
-    bow_words = [x[0][0] for x in bow_words]
+    bow_words_tups = knn(codebook, desc[2], k=1, dmetric_id=1)
+    bow_words = [x[0][0] for x in bow_words_tups]
     for word in bow_words: # for each word of bow repr of img
         bow_repr[i][word] += 1  # count number of words selected from bow centroid vectors
                                 # bow_repr[i] => desc_imgs[i] histogram
@@ -150,18 +157,15 @@ for c in class_ids:
 N_test = len(desc_imgs_test) # 1500, number of imgs in test set 15x100
 k_nn = 15
 
-train_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
-train_acc[-1] = [0,0] # NOT-FOUND class
-
 test_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
 test_acc[-1] = [0,0] # NOT-FOUND class
 
 bow_repr_test = np.zeros((N_test, k), dtype=np.float32)
 for i,desc in enumerate(desc_imgs_test):
     # bow_words, bow_dist = vq(desc_imgs_test[2], codebook) # nearest neighbor implementaiton, own implementation or just 1-nn, en yakin centroid
-    bow_words = knn(codebook, desc[2], k=1, dmetric_id=1) # take the closest centroid as word for that sift vector
-    bow_words = [x[0][0] for x in bow_words]
-    for word in bow_words: # for each word of bow repr of img
+    bow_words_tups_test = knn(codebook, desc[2], k=1, dmetric_id=1) # take the closest centroid as word for that sift vector
+    bow_words_test = [x[0][0] for x in bow_words_tups_test]
+    for word in bow_words_test: # for each word of bow repr of img
         bow_repr_test[i][word] += 1  # count number of words selected from bow centroid vectors
                                 # bow_repr[i] => desc_imgs[i] histogram
 
@@ -171,12 +175,17 @@ bow_repr_test_normzd = (bow_repr_test/bow_repr_test_norms[:,None]) # (1500,15)
 
 # compare test set against train set
 # approx 1-2 min
-train_preds = knn(bow_repr_normzd, bow_repr_normzd, k=k_nn, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db 
-test_preds = knn(bow_repr_normzd, bow_repr_test_normzd, k=k_nn, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db
 
+"""
 # TRAIN ACC.
 # takes too much time, deactivate this block unless debugging
 # vote wrt closest nns and generate class predictions
+
+train_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
+train_acc[-1] = [0,0] # NOT-FOUND class
+
+train_preds = knn(bow_repr_normzd, bow_repr_normzd, k=k_nn, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db 
+
 for i,desc in enumerate(desc_imgs):
     voted_imgs = [x[0] for x in train_preds[i]]
     voted_classes = [desc_imgs[x][0] for x in voted_imgs]
@@ -184,9 +193,11 @@ for i,desc in enumerate(desc_imgs):
     ground_truth = desc_imgs[i][0]
     train_acc[ground_truth][0] += (prediction==ground_truth)
     train_acc[ground_truth][1] += 1
+"""
 
 # TEST ACC.
 # vote wrt closest nns and generate class predictions
+test_preds = knn(bow_repr_normzd, bow_repr_test_normzd, k=k_nn, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db
 for i,desc in enumerate(desc_imgs_test):
     voted_imgs = [x[0] for x in test_preds[i]]
     voted_classes = [desc_imgs[x][0] for x in voted_imgs]

@@ -76,6 +76,16 @@ Please fill in the sections below only with the requested information. If you ha
 \section{Local Features (25 pts)}
     \begin{itemize}
         \item Explain SIFT and Dense-SIFT in your own words. What is the main difference?
+        \begin{center}
+            \raggedright
+            Sift is a keypoint detector that is designed to capture features that are indepent from the scale of the image.
+            Its scale invariance property stems from difference of gaussian operations with different kernel size resolutions which captures keypoints at varying scale.
+            Then we can quantize an orientation for each keypoint and when all features orientation is described wrt the keypoint orientation, then it'll additionally have rotation invariance alongside scale invariance.
+            These are all desired invariances that are needed to select interesting or descriptive points in images in order to identify, match, classify etc.
+            Dense-Sift is a kind of modification on top of conventional Sift method. In Sift locations of keypoint descriptors are determined by the default algorithm.
+            On the contrary, in Dense-Sift center-positions (x,y) can be fed to Sift algorithm to create descriptors around that point, or equivalently one can partition the image into grid like portions 
+            and feed them individually through default Sift which in a way has similar behaviour, resulting in specific sift vectors around that spatial region.
+        \end{center}
         \item Put your quantitative results (classification accuracy) regarding 5 values of SIFT and 3 values of Dense-SIFT parameters here. In SIFT change each parameter once while keeping others same and in Dense-SIFT change size of feature extraction region. Discuss the effect of these parameters by using 128 clusters in k-means and 8 nearest neighbors for classification.
     \end{itemize}
 

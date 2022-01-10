@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1641554583 "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.tex" "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.pdf" "template" 1641626691
-  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.aux" 1641554584 1178 1537593e449e1fc6337d1132ee35c856 ""
-  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.tex" 1640550946 4449 6cb73e4fbcab0fa43cd188bc9dc0a0ab ""
+["pdflatex"] 1641821669 "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.tex" "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.pdf" "template" 1641821671
+  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.aux" 1641821671 1178 29841db45824d9349e51c8341a7fd4f1 ""
+  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.tex" 1641821669 5724 7c5735c4b7ab8ae3c6285e3867e5fa5f ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -115,13 +115,13 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1634914371 2724738 37e122f81de486a16b4af4ee68dced98 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "template.aux" 1641554584 1178 1537593e449e1fc6337d1132ee35c856 "pdflatex"
-  "template.out" 1641554584 746 d7b22c53d15a9dd4518c9f87a8014dc0 "pdflatex"
-  "template.tex" 1640550946 4449 6cb73e4fbcab0fa43cd188bc9dc0a0ab ""
+  "template.aux" 1641821671 1178 29841db45824d9349e51c8341a7fd4f1 "pdflatex"
+  "template.out" 1641821671 746 d7b22c53d15a9dd4518c9f87a8014dc0 "pdflatex"
+  "template.tex" 1641821669 5724 7c5735c4b7ab8ae3c6285e3867e5fa5f ""
   (generated)
-  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.pdf"
-  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.log"
   "template.out"
+  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.pdf"
   "template.pdf"
-  "template.log"
+  "/Users/alpayozkan/git/CENG-483/hw/hw2/the2/template.log"
   "template.aux"
+  "template.log"

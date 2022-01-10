@@ -20,8 +20,26 @@ def custom_sift(sift, img, is_dense=False, grid_size=1):
     else:
         return sift.detectAndCompute(img, None)
 
-sift = cv2.xfeatures2d.SIFT_create()
-# sift = cv2.SIFT_create(contrastThreshold=0.001)
+# DEFINE SIFT Params Here
+# sift = cv2.xfeatures2d.SIFT_create()
+
+# DENSE
+is_dense = False
+grid_size = 5
+
+# SIFT
+nfeatures = 0
+nOctaveLayers = 3
+contrastThreshold = 0.04
+edgeThreshold = 10
+sigma = 1.6
+
+sift = cv2.SIFT_create(
+    nfeatures=nfeatures,
+    nOctaveLayers=nOctaveLayers,
+    contrastThreshold=contrastThreshold,
+    edgeThreshold=edgeThreshold,
+    sigma=sigma)
 
 desc_imgs = []
 
@@ -35,7 +53,7 @@ for c in class_ids:
         img_name = class_path + img_name
         # print(img_name)
         img = cv2.imread(img_name)
-        kpts, des = sift.detectAndCompute(img, None)
+        kpts, des = custom_sift(sift, img, is_dense, grid_size)
         
         if not isinstance(des, np.ndarray): # NOT_FOUND class, since no descriptor available
             undef +=1
@@ -58,7 +76,7 @@ desc_stack = np.vstack([dsc[2] for dsc in desc_imgs])
 # cluster-center dictionary
 from scipy.cluster.vq import kmeans, vq
 k = 128 # 3 dk surdu
-iters = 5
+iters = 15
 codebook, dist = kmeans(desc_stack, k, iters)
 
 
@@ -144,7 +162,7 @@ for c in class_ids:
         img_name = class_path + img_name
         # print(img_name)
         img = cv2.imread(img_name)
-        kpts, des = sift.detectAndCompute(img, None)
+        kpts, des = custom_sift(sift, img, is_dense, grid_size)
         
         if not isinstance(des, np.ndarray): # NOT_FOUND class, since no descriptor available
             undef_test +=1
@@ -155,7 +173,7 @@ for c in class_ids:
 
 # Extract bow representations of test imgs
 N_test = len(desc_imgs_test) # 1500, number of imgs in test set 15x100
-k_nn = 15
+k_nn = 8 # neares neighbor parameter
 
 test_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
 test_acc[-1] = [0,0] # NOT-FOUND class
@@ -206,3 +224,12 @@ for i,desc in enumerate(desc_imgs_test):
     test_acc[ground_truth][0] += (prediction==ground_truth)
     test_acc[ground_truth][1] += 1
 
+def avg_acc(class_acc):
+    tot = 0
+    corr = 0
+    for c in class_acc:
+        tot += class_acc[c][1]
+        corr += class_acc[c][0]
+    return corr/tot
+
+test_acc_avg = avg_acc(test_acc)

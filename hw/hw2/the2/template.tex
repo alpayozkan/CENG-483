@@ -96,19 +96,86 @@ Please fill in the sections below only with the requested information. If you ha
     \vspace*{0.5cm}
         \begin{tabular}{ |p{1.5cm}||p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{2cm}|  }
             \hline
-            \multicolumn{6}{|c|}{Sift: Parameters vs Accuracy} \\
+            \multicolumn{6}{|c|}{Sift: Parameters vs Accuracy (default parameters)} \\
             \hline
             Accuracy (1.0) & nfeatures & nOctaveLayers & contrastThreshold & edgeThreshold & sigma \\
             \hline
-            0.188 & 0 & 3 & 0.04 & 10 & 1.6 \\
-            \hline
-            24 x 24 & 1.0 & 1.0 & 0.36 & 0.22 & 1.0 \\
-            \hline
-            16 x 16 & 1.0 & 1.0 & 0.3 & 0.255 & 1.0 \\
-            \hline
-            12 x 12 & 1.0 & 1.0 & 0.31 & 0.3 & 1.0 \\
+            0.17 & 0 & 3 & 0.04 & 10 & 1.6 \\
             \hline
         \end{tabular}
+    
+        \vspace*{0.5cm}
+    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
+        \hline
+        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
+        \hline
+        Accuracy (1.0) & nfeatures \\
+        \hline
+        0.17 & 0 \\
+        \hline
+        0.17 & 100 \\
+        \hline
+        0.17 & 20 \\
+        \hline
+        0.16 & 10 \\
+        \hline
+        0.10 & 1 \\
+        \hline
+    \end{tabular}
+
+    \vspace*{0.5cm}
+    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
+        \hline
+        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
+        \hline
+        Accuracy (1.0) & nOctaveLayers \\
+        \hline
+        - & 1 \\
+        \hline
+        0.17 & 3 \\
+        \hline
+        0.18 & 5 \\
+        \hline
+        - & 10 \\
+        \hline
+        - & 20 \\
+        \hline
+        - & 30 \\
+        \hline
+    \end{tabular}
+
+    \vspace*{0.5cm}
+        \begin{tabular}{ |p{1.5cm}||p{3cm}|  }
+            \hline
+            \multicolumn{2}{|c|}{Dense-Sift: Parameters vs Accuracy} \\
+            \hline
+            Accuracy (1.0) & Grid\_Size \\
+            \hline
+            - & - \\
+            \hline
+            - & - \\
+            \hline
+            - & - \\
+            \hline
+        \end{tabular}
+
+    \begin{center}
+        \raggedright
+        In this experiment, k-value in kmeans is set to 128 cluster and k value of k\_nn neearest neighbor is set to 8 as required.
+        By changing the parameters of SIFT, I've obtained significant changes on the accuracy of our classifier.
+        \\
+        Firstly, nfeatures determines the number of top features in terms of local contrast scores to keep in the sift descriptor. 
+        Default nfeatures value takes all of the features in the descriptor. When nfeatures is set very low like 1, I've observed that accuracy drops drastically
+        which makes sense because we are dropping discriminative sift vectors and this information loss has a cost on the overall accuracy.
+        However, nfeatures=20 or 100, more or less yields the same accuracy which probably means that top 20 sift vectors were discriminative enough to make 
+        classification equivalent to the default param that is used in sift.
+        \\
+        Secondly, nOctaveLayers are number of difference of gaussian layers which helps capturing features at varying scales.
+        If we have more nOctaveLayers then that would be more features at varying scales which means we have more information to describe the class.
+        As, it's clear from the observations increasing nOctaveLayers yields better accuracy for this problem.
+        However, it brings more computational costs.
+
+    \end{center}
 
 \section{Bag of Features (45 pts)}
     \begin{itemize}

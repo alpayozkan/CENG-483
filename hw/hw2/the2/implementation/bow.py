@@ -21,7 +21,7 @@ def custom_sift(sift, img, is_dense=False, grid_size=1):
         return sift.detectAndCompute(img, None)
 
 # DEFINE SIFT Params Here
-# sift = cv2.xfeatures2d.SIFT_create()
+
 
 # DENSE
 is_dense = False
@@ -29,17 +29,24 @@ grid_size = 5
 
 # SIFT
 nfeatures = 0
-nOctaveLayers = 3
+nOctaveLayers = 7
 contrastThreshold = 0.04
 edgeThreshold = 10
 sigma = 1.6
 
-sift = cv2.SIFT_create(
-    nfeatures=nfeatures,
-    nOctaveLayers=nOctaveLayers,
-    contrastThreshold=contrastThreshold,
-    edgeThreshold=edgeThreshold,
-    sigma=sigma)
+sift = cv2.xfeatures2d.SIFT_create(
+   nfeatures=nfeatures,
+   nOctaveLayers=nOctaveLayers,
+   contrastThreshold=contrastThreshold,
+   edgeThreshold=edgeThreshold,
+   sigma=sigma)
+
+#sift = cv2.SIFT_create(
+#    nfeatures=nfeatures,
+#    nOctaveLayers=nOctaveLayers,
+#    contrastThreshold=contrastThreshold,
+#    edgeThreshold=edgeThreshold,
+#    sigma=sigma)
 
 desc_imgs = []
 

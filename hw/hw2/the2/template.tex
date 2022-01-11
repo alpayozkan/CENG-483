@@ -130,17 +130,53 @@ Please fill in the sections below only with the requested information. If you ha
         \hline
         Accuracy (1.0) & nOctaveLayers \\
         \hline
-        - & 1 \\
+        0.19 & 1 \\
+        \hline
+        0.19 & 2 \\
         \hline
         0.17 & 3 \\
         \hline
         0.18 & 5 \\
         \hline
-        - & 10 \\
+        0.17 & 7 \\
         \hline
-        - & 20 \\
+    \end{tabular}
+
+    \vspace*{0.5cm}
+    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
         \hline
-        - & 30 \\
+        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
+        \hline
+        Accuracy (1.0) & contrastThreshold \\
+        \hline
+        0.0 & 1 \\
+        \hline
+        0.22 & 0.1 \\
+        \hline
+        0.16 & 0.04 \\
+        \hline
+        0.16 & 0.01 \\
+        \hline
+        0.17 & 0.001 \\
+        \hline
+    \end{tabular}
+
+    \vspace*{0.5cm}
+    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
+        \hline
+        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
+        \hline
+        Accuracy (1.0) & edgeThreshold \\
+        \hline
+        - & - \\
+        \hline
+        0.18 & 10 \\
+        \hline
+        0.2 & 100 \\
+        \hline
+        - & - \\
+        \hline
+        - & - \\
         \hline
     \end{tabular}
 
@@ -171,9 +207,21 @@ Please fill in the sections below only with the requested information. If you ha
         classification equivalent to the default param that is used in sift.
         \\
         Secondly, nOctaveLayers are number of difference of gaussian layers which helps capturing features at varying scales.
-        If we have more nOctaveLayers then that would be more features at varying scales which means we have more information to describe the class.
-        As, it's clear from the observations increasing nOctaveLayers yields better accuracy for this problem.
-        However, it brings more computational costs.
+        If we have more nOctaveLayers then that would be more features at varying scales but with exponentially (with order of $k^{2}$) more blurring.
+        This creates new features at very high scale due to higher blurring as a result of increased nOctaveLayers value.
+        As far as I understand, in sift they have probably chosen the elbow value which should be somewhere around 3, because after/smaller than 3 it starts to decline very sharply.
+        In addition, having less nOctaveLayers might be disadvantageous too depending on the problem and image properties, hence I think 3 would be a better or less risky choice when compared to 1,2 which probably results
+        in less scale invariant descriptors.
+        \\
+        Thirdly, contrastThreshold parameter filters weak feature below a threshold value measured in contrast.
+        When it's set higher, we would get less features and when it's set lower, we would get more features.
+        However, more features don't always imply more accuracy, some redundant features can hurt our performance in classification as we'll see.
+        I've observed that increasing contrastThreshold, results in less sift descriptors. For instance, contrastThreshold=1 results no sift vector, because it's too high and contrastThreshold=0.001 results in most number of sift descriptors.
+        ContrastThreshold is a hyperparameter that we should tune for our problem and in our case 0.1 has resulted in the best accuracy, because it has discarded less important features and emphasized on more important features.
+        \\
+        Fourtly, edgeThreshold is a hyperparameter that basically filters edge like features, its meaning is slightly different thant contrastThreshold in the sense that, higher edgeThreshold value results in more features, because it basically eleminates features above that threshold not below.
+        So, higher threshold results in more features, but once again that doesn't imply more accuracy, we still need to tune our param to give priority to important edges.
+
 
     \end{center}
 

@@ -29,24 +29,24 @@ grid_size = 5
 
 # SIFT
 nfeatures = 0
-nOctaveLayers = 7
+nOctaveLayers = 3
 contrastThreshold = 0.04
-edgeThreshold = 10
+edgeThreshold = 200
 sigma = 1.6
 
-sift = cv2.xfeatures2d.SIFT_create(
-   nfeatures=nfeatures,
-   nOctaveLayers=nOctaveLayers,
-   contrastThreshold=contrastThreshold,
-   edgeThreshold=edgeThreshold,
-   sigma=sigma)
+#   sift = cv2.xfeatures2d.SIFT_create(
+#      nfeatures=nfeatures,
+#      nOctaveLayers=nOctaveLayers,
+#      contrastThreshold=contrastThreshold,
+#      edgeThreshold=edgeThreshold,
+#      sigma=sigma)
 
-#sift = cv2.SIFT_create(
-#    nfeatures=nfeatures,
-#    nOctaveLayers=nOctaveLayers,
-#    contrastThreshold=contrastThreshold,
-#    edgeThreshold=edgeThreshold,
-#    sigma=sigma)
+sift = cv2.SIFT_create(
+    nfeatures=nfeatures,
+    nOctaveLayers=nOctaveLayers,
+    contrastThreshold=contrastThreshold,
+    edgeThreshold=edgeThreshold,
+    sigma=sigma)
 
 desc_imgs = []
 

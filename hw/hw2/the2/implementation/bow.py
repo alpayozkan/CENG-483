@@ -31,7 +31,7 @@ grid_size = 5
 nfeatures = 0
 nOctaveLayers = 3
 contrastThreshold = 0.04
-edgeThreshold = 200
+edgeThreshold = 10
 sigma = 1.6
 
 #   sift = cv2.xfeatures2d.SIFT_create(
@@ -65,7 +65,8 @@ for c in class_ids:
         if not isinstance(des, np.ndarray): # NOT_FOUND class, since no descriptor available
             undef +=1
             empty_des = np.zeros((1, sift.descriptorSize()), np.float32)
-            desc_imgs.append((-1, img_name, empty_des))
+            # alternative approach, NOT_FOUND class [-1]
+            desc_imgs.append((class_ids[c], img_name, empty_des))
         else:
             desc_imgs.append((class_ids[c], img_name, des))
 
@@ -174,7 +175,8 @@ for c in class_ids:
         if not isinstance(des, np.ndarray): # NOT_FOUND class, since no descriptor available
             undef_test +=1
             empty_des = np.zeros((1, sift.descriptorSize()), np.float32)
-            desc_imgs_test.append((-1, img_name, empty_des))
+            # alternative approach, NOT_FOUND class [-1]
+            desc_imgs_test.append((class_ids[c], img_name, empty_des))
         else:
             desc_imgs_test.append((class_ids[c], img_name, des))
 
@@ -232,11 +234,23 @@ for i,desc in enumerate(desc_imgs_test):
     test_acc[ground_truth][1] += 1
 
 def avg_acc(class_acc):
+    # accuracy excluding undef class
     tot = 0
     corr = 0
     for c in class_acc:
         tot += class_acc[c][1]
         corr += class_acc[c][0]
+    return corr/tot
+
+def avg_acc_undef(class_acc):
+    # accuracy including undef class as incorrect
+    tot = 0
+    corr = 0
+    for c in class_acc:
+        tot += class_acc[c][1]
+        corr += class_acc[c][0]
+    # add undefs to total
+    tot += class_acc[-1][1]
     return corr/tot
 
 test_acc_avg = avg_acc(test_acc)

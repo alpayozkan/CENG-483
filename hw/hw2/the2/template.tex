@@ -102,6 +102,14 @@ Please fill in the sections below only with the requested information. If you ha
             \hline
             0.17 & 0 & 3 & 0.04 & 10 & 1.6 \\
             \hline
+            - & - & - & - & - & - \\
+            \hline
+            - & - & - & - & - & - \\
+            \hline
+            - & - & - & - & - & - \\
+            \hline
+            - & - & - & - & - & - \\
+            \hline
         \end{tabular}
     
         \vspace*{0.5cm}
@@ -168,15 +176,34 @@ Please fill in the sections below only with the requested information. If you ha
         \hline
         Accuracy (1.0) & edgeThreshold \\
         \hline
-        - & - \\
+        0 & 1 \\
         \hline
         0.18 & 10 \\
         \hline
+        0.18 & 50 \\
+        \hline
         0.2 & 100 \\
         \hline
-        - & - \\
+        0.19 & 200 \\
         \hline
-        - & - \\
+        0.18 & 300 \\
+        \hline
+    \end{tabular}
+
+    \vspace*{0.5cm}
+    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
+        \hline
+        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
+        \hline
+        Accuracy (1.0) & sigma \\
+        \hline
+        0.16 & 1 \\
+        \hline
+        0.17 & 1.6 \\
+        \hline
+        0.18 & 2 \\
+        \hline
+        0.19 & 3 \\
         \hline
     \end{tabular}
 
@@ -199,28 +226,39 @@ Please fill in the sections below only with the requested information. If you ha
         \raggedright
         In this experiment, k-value in kmeans is set to 128 cluster and k value of k\_nn neearest neighbor is set to 8 as required.
         By changing the parameters of SIFT, I've obtained significant changes on the accuracy of our classifier.
-        \\
+        \\~\\
         Firstly, nfeatures determines the number of top features in terms of local contrast scores to keep in the sift descriptor. 
         Default nfeatures value takes all of the features in the descriptor. When nfeatures is set very low like 1, I've observed that accuracy drops drastically
         which makes sense because we are dropping discriminative sift vectors and this information loss has a cost on the overall accuracy.
         However, nfeatures=20 or 100, more or less yields the same accuracy which probably means that top 20 sift vectors were discriminative enough to make 
         classification equivalent to the default param that is used in sift.
-        \\
+        \\~\\
         Secondly, nOctaveLayers are number of difference of gaussian layers which helps capturing features at varying scales.
         If we have more nOctaveLayers then that would be more features at varying scales but with exponentially (with order of $k^{2}$) more blurring.
         This creates new features at very high scale due to higher blurring as a result of increased nOctaveLayers value.
         As far as I understand, in sift they have probably chosen the elbow value which should be somewhere around 3, because after/smaller than 3 it starts to decline very sharply.
-        In addition, having less nOctaveLayers might be disadvantageous too depending on the problem and image properties, hence I think 3 would be a better or less risky choice when compared to 1,2 which probably results
+        In addition, having less nOctaveLayers might be disadvantageous too depending on the problem and image properties, hence I think 3 would be a better or less risky choice when compared to 1,2 which results
         in less scale invariant descriptors.
-        \\
+        \\~\\
         Thirdly, contrastThreshold parameter filters weak feature below a threshold value measured in contrast.
         When it's set higher, we would get less features and when it's set lower, we would get more features.
         However, more features don't always imply more accuracy, some redundant features can hurt our performance in classification as we'll see.
         I've observed that increasing contrastThreshold, results in less sift descriptors. For instance, contrastThreshold=1 results no sift vector, because it's too high and contrastThreshold=0.001 results in most number of sift descriptors.
         ContrastThreshold is a hyperparameter that we should tune for our problem and in our case 0.1 has resulted in the best accuracy, because it has discarded less important features and emphasized on more important features.
-        \\
-        Fourtly, edgeThreshold is a hyperparameter that basically filters edge like features, its meaning is slightly different thant contrastThreshold in the sense that, higher edgeThreshold value results in more features, because it basically eleminates features above that threshold not below.
+        \\~\\
+        Fourtly, edgeThreshold is a hyperparameter that basically filters edge like features, its meaning is slightly different than contrastThreshold in the sense that, higher edgeThreshold value results in more features, because it basically eleminates features above that threshold not below.
         So, higher threshold results in more features, but once again that doesn't imply more accuracy, we still need to tune our param to give priority to important edges.
+        As it's clear from our experiments, low edgeThreshold values yields less features, edgeThreshold=1 is an extreme case which results in no sift descriptors. 
+        However, after some point accuracy doesn't improve as threshold gets larger.
+        \\~\\
+        Finally, sigma parameter is the sigma of the gaussians applied at each octave layers in sift.
+        Higher sigma implies more blurring, which would encourage sift to capture features at higher scales
+        and lower sigma would encourage sift to capture features at smaller scale. 
+        As sigma increases, number of sift descriptors decrease, because blurring kills some details.
+        Though, accuracy might seem increasing as sigma increases, but this is due to the fact that I classify none descriptors as a separate class NOT\_FOUND with index -1 in test\_acc dictionary 
+        and I've observed that number of elements in NOT\_FOUND increases with sigma which corresponds to less information for that image.
+        That's why I've also created another accuracy function which includes NOT\_FOUND as incorrect predictions.
+        
 
 
     \end{center}

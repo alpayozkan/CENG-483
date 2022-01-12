@@ -96,131 +96,75 @@ Please fill in the sections below only with the requested information. If you ha
     \vspace*{0.5cm}
         \begin{tabular}{ |p{1.5cm}||p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{2cm}|  }
             \hline
-            \multicolumn{6}{|c|}{Sift: Parameters vs Accuracy (default parameters)} \\
+            \multicolumn{6}{|c|}{Sift: Parameters vs Accuracy} \\
             \hline
             Accuracy (1.0) & nfeatures & nOctaveLayers & contrastThreshold & edgeThreshold & sigma \\
             \hline
+            % default
             0.17 & 0 & 3 & 0.04 & 10 & 1.6 \\
             \hline
-            - & - & - & - & - & - \\
             \hline
-            - & - & - & - & - & - \\
+            % nfeatures
+            0.10 & 1 & 3 & 0.04 & 10 & 1.6 \\
             \hline
-            - & - & - & - & - & - \\
+            0.18 & 20 & 3 & 0.04 & 10 & 1.6 \\
             \hline
-            - & - & - & - & - & - \\
+            0.16 & 100 & 3 & 0.04 & 10 & 1.6 \\
+            \hline
+            \hline
+            % nOctaveLayers
+            0.19 & 0 & 1 & 0.04 & 10 & 1.6 \\
+            \hline
+            0.16 & 0 & 5 & 0.04 & 10 & 1.6 \\
+            \hline
+            0.17 & 0 & 7 & 0.04 & 10 & 1.6 \\
+            \hline
+            \hline
+            % contrastThreshold
+            0.0 & 0 & 3 & 1 & 10 & 1.6 \\
+            \hline
+            0.16 & 0 & 3 & 0.1 & 10 & 1.6 \\
+            \hline
+            0.17 & 0 & 3 & 0.01 & 10 & 1.6 \\
+            \hline
+            \hline
+            % edgeThreshold
+            0.0 & 0 & 3 & 0.04 & 1 & 1.6 \\
+            \hline
+            0.19 & 0 & 3 & 0.04 & 50 & 1.6 \\
+            \hline
+            0.19 & 0 & 3 & 0.04 & 100 & 1.6 \\
+            \hline
+            \hline
+            % sigma
+            0.0 & 0 & 3 & 0.04 & 10 & 0.1 \\
+            \hline
+            0.15 & 0 & 3 & 0.04 & 10 & 1 \\
+            \hline
+            0.17 & 0 & 3 & 0.04 & 10 & 2 \\
+            \hline
+            0.17 & 0 & 3 & 0.04 & 10 & 3 \\
+            \hline
+            0.0 & 0 & 3 & 0.04 & 10 & 10 \\
+            \hline
+
+
             \hline
         \end{tabular}
-    
+
         \vspace*{0.5cm}
-    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
-        \hline
-        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
-        \hline
-        Accuracy (1.0) & nfeatures \\
-        \hline
-        0.17 & 0 \\
-        \hline
-        0.17 & 100 \\
-        \hline
-        0.17 & 20 \\
-        \hline
-        0.16 & 10 \\
-        \hline
-        0.10 & 1 \\
-        \hline
-    \end{tabular}
-
-    \vspace*{0.5cm}
-    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
-        \hline
-        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
-        \hline
-        Accuracy (1.0) & nOctaveLayers \\
-        \hline
-        0.19 & 1 \\
-        \hline
-        0.19 & 2 \\
-        \hline
-        0.17 & 3 \\
-        \hline
-        0.18 & 5 \\
-        \hline
-        0.17 & 7 \\
-        \hline
-    \end{tabular}
-
-    \vspace*{0.5cm}
-    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
-        \hline
-        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
-        \hline
-        Accuracy (1.0) & contrastThreshold \\
-        \hline
-        0.0 & 1 \\
-        \hline
-        0.22 & 0.1 \\
-        \hline
-        0.16 & 0.04 \\
-        \hline
-        0.16 & 0.01 \\
-        \hline
-        0.17 & 0.001 \\
-        \hline
-    \end{tabular}
-
-    \vspace*{0.5cm}
-    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
-        \hline
-        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
-        \hline
-        Accuracy (1.0) & edgeThreshold \\
-        \hline
-        0 & 1 \\
-        \hline
-        0.18 & 10 \\
-        \hline
-        0.18 & 50 \\
-        \hline
-        0.2 & 100 \\
-        \hline
-        0.19 & 200 \\
-        \hline
-        0.18 & 300 \\
-        \hline
-    \end{tabular}
-
-    \vspace*{0.5cm}
-    \begin{tabular}{ |p{1.5cm}||p{2cm}| }
-        \hline
-        \multicolumn{2}{|c|}{Sift: Parameters vs Accuracy (other params default)} \\
-        \hline
-        Accuracy (1.0) & sigma \\
-        \hline
-        0.16 & 1 \\
-        \hline
-        0.17 & 1.6 \\
-        \hline
-        0.18 & 2 \\
-        \hline
-        0.19 & 3 \\
-        \hline
-    \end{tabular}
-
-    \vspace*{0.5cm}
-        \begin{tabular}{ |p{1.5cm}||p{3cm}|  }
+        \begin{tabular}{ |p{1.5cm}||p{3cm}| }
             \hline
-            \multicolumn{2}{|c|}{Dense-Sift: Parameters vs Accuracy} \\
+            \multicolumn{2}{|c|}{Dense-Sift: Parameters vs Accuracy (default sift parameters)} \\
             \hline
-            Accuracy (1.0) & Grid\_Size \\
+            Accuracy (1.0) & grid\_size \\
             \hline
-            - & - \\
-            \hline
-            - & - \\
-            \hline
-            - & - \\
+            0.17 & 8 \\ % 4x4
+            0.17 & 16 \\ % 2x2
+            0.17 & 32 \\ % 1x1
             \hline
         \end{tabular}
+
 
     \begin{center}
         \raggedright
@@ -244,7 +188,7 @@ Please fill in the sections below only with the requested information. If you ha
         When it's set higher, we would get less features and when it's set lower, we would get more features.
         However, more features don't always imply more accuracy, some redundant features can hurt our performance in classification as we'll see.
         I've observed that increasing contrastThreshold, results in less sift descriptors. For instance, contrastThreshold=1 results no sift vector, because it's too high and contrastThreshold=0.001 results in most number of sift descriptors.
-        ContrastThreshold is a hyperparameter that we should tune for our problem and in our case 0.1 has resulted in the best accuracy, because it has discarded less important features and emphasized on more important features.
+        ContrastThreshold is a hyperparameter that we should tune for our problem and in our case 0.04 has resulted in the best accuracy, because it has discarded less important features and emphasized on more important features.
         \\~\\
         Fourtly, edgeThreshold is a hyperparameter that basically filters edge like features, its meaning is slightly different than contrastThreshold in the sense that, higher edgeThreshold value results in more features, because it basically eleminates features above that threshold not below.
         So, higher threshold results in more features, but once again that doesn't imply more accuracy, we still need to tune our param to give priority to important edges.
@@ -255,10 +199,10 @@ Please fill in the sections below only with the requested information. If you ha
         Higher sigma implies more blurring, which would encourage sift to capture features at higher scales
         and lower sigma would encourage sift to capture features at smaller scale. 
         As sigma increases, number of sift descriptors decrease, because blurring kills some details.
-        Though, accuracy might seem increasing as sigma increases, but this is due to the fact that I classify none descriptors as a separate class NOT\_FOUND with index -1 in test\_acc dictionary 
-        and I've observed that number of elements in NOT\_FOUND increases with sigma which corresponds to less information for that image.
-        That's why I've also created another accuracy function which includes NOT\_FOUND as incorrect predictions.
-        
+        Also, low sigma values have low accuracies, because we capture features at lower scales more frequently.
+        That's why we need to forma a balance for the problem by tuning the hyperparameter.
+       
+        % Note yaz 
 
 
     \end{center}

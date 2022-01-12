@@ -24,8 +24,8 @@ def custom_sift(sift, img, is_dense=False, grid_size=1):
 
 
 # DENSE
-is_dense = False
-grid_size = 5
+is_dense = True
+grid_size = 32
 
 # SIFT
 nfeatures = 0

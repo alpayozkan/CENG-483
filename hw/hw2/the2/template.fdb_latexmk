@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1642078593 "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.tex" "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.pdf" "template" 1642078594
+["pdflatex"] 1642081146 "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.tex" "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.pdf" "template" 1642081182
   "/etc/texmf/web2c/texmf.cnf" 1588930188 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.aux" 1642078594 1732 c7acb66dd822037cddd51517c7ee8701 ""
-  "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.tex" 1642078593 26119 ed918c6e705c9c82b20132aee36a698f ""
+  "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.aux" 1642081147 1732 c7acb66dd822037cddd51517c7ee8701 ""
+  "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.tex" 1642081182 26262 a24ee70455db133fa026a39fe35be920 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -264,13 +264,13 @@
   "confusion/knn_4.csv" 1642072644 5625 92bfd9ff58595cef15497a84788a7d39 ""
   "confusion/knn_64.csv" 1642072575 5625 9c0860dbce2b06699dd2d388a77509d3 ""
   "confusion/knn_8.csv" 1642077978 5625 f1f7ecfa153b886aec5d2468df3d879c ""
-  "template.aux" 1642078594 1732 c7acb66dd822037cddd51517c7ee8701 "pdflatex"
-  "template.out" 1642078594 250 3e4b3f2539845460ece1b32348305fb2 "pdflatex"
-  "template.tex" 1642078593 26119 ed918c6e705c9c82b20132aee36a698f ""
+  "template.aux" 1642081147 1732 c7acb66dd822037cddd51517c7ee8701 "pdflatex"
+  "template.out" 1642081147 250 3e4b3f2539845460ece1b32348305fb2 "pdflatex"
+  "template.tex" 1642081182 26262 a24ee70455db133fa026a39fe35be920 ""
   (generated)
   "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.log"
-  "template.out"
-  "template.log"
   "template.pdf"
+  "template.log"
   "template.aux"
   "/home/pumpkin/.git/CENG-483/hw/hw2/the2/template.pdf"
+  "template.out"

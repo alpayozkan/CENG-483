@@ -13,9 +13,9 @@ classes = sorted(os.listdir(train_path))
 class_ids = dict({s: c for c,s in enumerate(classes)})
 # class_ids["NOT_FOUND"] = -1
 
-def custom_sift(sift, img, is_dense=False, grid_size=1):
+def custom_sift(sift, img, is_dense=False, grid_size=1, radius=4, offset=0):
     if is_dense:
-        kp_grids = [cv2.KeyPoint(x, y, grid_size) for y in range(0, img.shape[0], grid_size) for x in range(0, img.shape[1], grid_size)]
+        kp_grids = [cv2.KeyPoint(float(x), float(y), radius) for y in range(offset, img.shape[0], grid_size) for x in range(offset, img.shape[1], grid_size)]
         return sift.compute(img, kp_grids)
     else:
         return sift.detectAndCompute(img, None)
@@ -25,7 +25,9 @@ def custom_sift(sift, img, is_dense=False, grid_size=1):
 
 # DENSE
 is_dense = True
-grid_size = 32
+grid_size = 8
+radius = 4
+offset = 4
 
 # SIFT
 nfeatures = 0
@@ -60,7 +62,7 @@ for c in class_ids:
         img_name = class_path + img_name
         # print(img_name)
         img = cv2.imread(img_name)
-        kpts, des = custom_sift(sift, img, is_dense, grid_size)
+        kpts, des = custom_sift(sift, img, is_dense, grid_size, radius, offset)
         
         if not isinstance(des, np.ndarray): # NOT_FOUND class, since no descriptor available
             undef +=1
@@ -83,10 +85,13 @@ desc_stack = np.vstack([dsc[2] for dsc in desc_imgs])
 # k-means cluster desc_stack => sift vector vocab/dictionary
 # cluster-center dictionary
 from scipy.cluster.vq import kmeans, vq
+from sklearn import cluster 
 k = 128 # 3 dk surdu
 iters = 15
+print("ok")
+# clusters = cluster.MiniBatchKMeans(n_clusters=k, random_state=0).fit(desc_stack) 
 codebook, dist = kmeans(desc_stack, k, iters)
-
+print("ok-1")
 
 
 def knn(db, query, k=1, dmetric_id=0): 
@@ -170,7 +175,7 @@ for c in class_ids:
         img_name = class_path + img_name
         # print(img_name)
         img = cv2.imread(img_name)
-        kpts, des = custom_sift(sift, img, is_dense, grid_size)
+        kpts, des = custom_sift(sift, img, is_dense, grid_size, radius, offset)
         
         if not isinstance(des, np.ndarray): # NOT_FOUND class, since no descriptor available
             undef_test +=1

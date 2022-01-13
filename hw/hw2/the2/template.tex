@@ -15,7 +15,15 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage[hmargin=3cm,vmargin=5.0cm]{geometry}
+
 \usepackage{epstopdf}
+\usepackage{pgfplotstable}
+\usepackage{array}
+\usepackage{datatool}
+\usepackage{siunitx}
+\usepackage{csvsimple}
+
+
 \topmargin=-1.8cm
 \addtolength{\textheight}{6.5cm}
 \addtolength{\textwidth}{2.0cm}
@@ -187,9 +195,8 @@ Please fill in the sections below only with the requested information. If you ha
             \hline
             Accuracy (1.0) & grid\_size & keypoint\_diameter & offset \\
             \hline
+            0.31 & 4 & 4 & 4 \\ % default
             0.27 & 8 & 4 & 4 \\ % default
-            \hline
-            \hline
             0.20 & 16 & 4 & 4 \\ % 2x2
             0.12 & 32 & 4 & 4 \\ % 1x1
             \hline
@@ -211,7 +218,7 @@ Please fill in the sections below only with the requested information. If you ha
         Hence, I've parametrised over grid-size, keypoint-diameter, and also an offset value to skip edge pixels and focus on inner part of the image as part of the experimentation.
         \\~\\
         Firstly, grid-size parameter adjusts spatiality of our sift descriptors, as expected as spatiality decreases we get less accuracy.
-        Grid-size 8 has resulted in the best accuracy, whereas grid-size 32 with only one keypoint has very poor accuracy.
+        Grid-size 4 has resulted in the best accuracy, whereas grid-size 32 with only one keypoint has very poor accuracy.
         However, if we have too little grid-size s like 1x1, I would expect not a very good accuracy, because too much unnecessary keypoints would overwhelm our classification leaving less emphasis on important keypoints.
         \\~\\
         Secondaly, keypoint-diameter adjusts the radius of the keypoint at that (x,y) location. In other words, it corresponds to the diameter of the keypoint circles.
@@ -237,6 +244,7 @@ Please fill in the sections below only with the requested information. If you ha
         I've implemented BoF through several steps. Firstly, I've iterated over all images and extracted their sift vectors/descriptors as in the from (m, 128) where m is the number of detected keypoints and 128 is the length of the sift vector.
         If there was no sift-vector which happened rarely, I've added a null vector with all zeros in the form of (1,128) to describe that case, in order to comply with the general BoF model.
         Then, I've saved all of these sift descriptors for each image which we now the class due to training set. Then I've stacked all of these vectors of images all together, and applied kmeans with k=128 and iters=15.
+        Also, I've sampled descriptor vectors from this stack, because number of descriptors are too large sometimes and it crashes the kmeans algorithm, probably due to ram memory, especially as grid-size gets smaller in dense-sift.
         That gives me a codebook of size (128,128) where we have 128 many centroids of sift vectors of size 128.
         I've implemented my own knn algorithm to get k-nearest neighbors of sift descriptors.
         Also, I used my own knn implementation to get 1-nn for bag of words representation calculation, where I assign sift descriptors of an image to its neares centroid in the codebook 
@@ -265,17 +273,47 @@ Please fill in the sections below only with the requested information. If you ha
     \vspace*{0.5cm}
         \begin{tabular}{ |p{1.5cm}||p{3cm}|p{3cm}|p{3cm}| }
             \hline
-            \multicolumn{3}{|c|}{Dense-Sift: Parameters vs Accuracy (default sift parameters)} \\
+            \multicolumn{3}{|c|}{Dense-Sift: BoF Parameters vs Accuracy (default sift parameters)} \\
             \hline
             Accuracy (1.0)  & kmeans\_k & kmeans\_iters\\
             \hline
-            0.27 & 8 & 15 \\ % default
+            0.31 & 128 & 15 \\ % default
+            \hline
+            0.31 & 256 & 30 \\
+            \hline
+            0.33 & 256 & 15 \\
+            \hline
+            0.27 & 64 & 15 \\
+            \hline
+            0.29 & 32 & 15 \\
             \hline
         \end{tabular}
        
         \begin{center}
             \raggedright
-            The feature extractor for these results are from Dense-Sift with default sift parameters and grid-size=8, keypoint-diamater=4, offset=4 which is used a baseline comparison model.
+            The feature extractor for these results are from Dense-Sift with default sift parameters and grid-size=8, keypoint-diamater=4, offset=4 which is used a baseline comparison model. Knn\_k is also fixed as 8 as in the previous experiments.
+            In this experiment, we measure how much accuracy changes when we change kmeans paraemeters
+            for BoF pipeline. I've parameterised this pipeline over kmeans\_k and kmeans\_iters.
+            \\~\\
+            Increasing iterations helps centroids to converge better vectors that minimize distance more.
+            Hence it has a potential to represent this vector space more generically in this case.
+            However, it increases the computational complexity of our model and it takes too much time to obtain experiment results. 
+            That's why I couldn't exceed iterations more than 30.
+            As we increase kmeans\_k it is reasonable to increase kmeans\_iters because the dimensionality increases and probably we would need more
+            iterations to converge to a proper centroid.
+            \\~\\
+            As it's clear from the observations decreasing kmeans\_k below 128 has resulted in less accuracy around 0.27 and 0.29, because codebook dimensionality has decreased
+            and we have less vectors or bins that represents bow of images whereas
+            it was around 0.30-0.31 with kmeans\_k=128. Increasing kmeans\_k can give us better accuracy, because
+            we will increase our features bins in bow representation which can help us in classification.
+            As it's clear from our results that we got almost the same accuracy with kmeans\_k=256.
+            However, I would prefer having lower kmeans\_k, because it's computationally much more feasible.
+            Moreover, increasing kmeans\_k too much would be too overkill and
+            we would get too sparse representation which would mitigate the learning process.
+            \\~\\
+            One interesting observation is that why kmeans\_k=256, kmeans\_iters=15 is higher than kmeans\_k=128, kmeans\_iters=30.
+            I think this can be due to random processes in the pipline namely random sampling from descriptor stack and also kmeans algorithm which
+            starts from a random initialization. Hence, 1-2 points off accuracy might differ. It's reasonable to pick one of these models as the best ones.
 
         \end{center}
 
@@ -285,6 +323,124 @@ Please fill in the sections below only with the requested information. If you ha
         \item What is the accuracy values, and how do you evaluate it? Briefly explain.
         \item Give confusion matrices for classification results of these combinations.
     \end{itemize}
+
+    \vspace*{0.5cm}
+        \begin{tabular}{ |p{1.5cm}||p{3cm}|p{3cm}| }
+            \hline
+            \multicolumn{2}{|c|}{Dense-Sift: KNN Parameters vs Accuracy (default sift parameters)} \\
+            \hline
+            Accuracy (1.0)  & knn\_k\\
+            \hline
+            0.28 & 4  \\ % default
+            \hline
+            0.31 & 8  \\ % default
+            \hline
+            0.30 & 16  \\ % default
+            \hline
+            0.29 & 32  \\ % default
+            \hline
+            0.29 & 64  \\ % default
+            \hline
+        \end{tabular}
+        
+        \begin{center}
+            \raggedright
+            I've used the best kmeans configuration that I've calculated previously in terms of both accuracy and computational feasibility which
+            is kmean\_k=128, kmeans\_iters=15 and also the best sift extractor same as part-2.
+            \\~\\
+            First of all, my expectation is that increasing k value of knn would increase accuracy untill some point and then it should decrease the accuracy.
+            Because we should give right of vote to important and sufficiently many matchings.
+            If k is low, then it would be biased or not democratic enough and also from the other perspective giving voting right to lots of matchings wouldn't be reliable in the sense that
+            too far away matchings will have the same effect as the closer ones while classifying.
+            My observations imply that knn\_k values are high after 16, gradually accuracy decreases from that point on.
+            \\~\\
+            Accuracy values in my implementation corresponds to total number of correct predictions divided by total number of predictions (which is equivalent to total number of observations).
+            First, I calculate class based accuracies how much of a given class, we can predict the correct label, and then
+            I mean this to get the total accuracy for the problem. Some classes have accuracies above the average, because they are easy to classify, but
+            whereas some classes have very poor accuracy from my observation.
+            \\~\\
+            Confusion matrices are attached to the report, I couldn't put them under this section, because it was too large and didn't fit.
+            Tables 1-5 below the report correspond to confusion matrices of [4,8,16,32,64] knn\_k values.
+            Classes are labeled as [0-14] both for columns and rows (unfortunately I couldn't put row labels), entry [0,0] corresponds to upper left corner of the matrix as conventional index [0,0]. 
+            For ex, for KNN\_4[0,0] = 44. Class indices: {'apple': 0, 'aquarium\_fish': 1, 'beetle': 2, 'camel': 3, 'crab': 4, 'cup': 5, 'elephant': 6, 'flatfish': 7, 'lion': 8, 'mushroom': 9, 'orange': 10, 'pear': 11, 'road': 12, 'skyscraper': 13, 'woman': 14}.
+
+
+        \end{center}
+
+        \begin{table}
+            \centering
+            \caption{KNN\_4}
+            \pgfplotstabletypeset[
+                column type=l,
+                every head row/.style={before row=\hline,after row=\hline},
+                every last row/.style={after row=\hline},
+                every first column/.style={column type/.add={|}{}},
+                every last column/.style={column type/.add={}{|}},
+               fixed zerofill,
+               precision=0,
+               columns={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+               col sep=space,
+               ]{confusion/knn_4.csv}
+               \centering
+            \caption{KNN\_8}
+            \pgfplotstabletypeset[
+                column type=l,
+                every head row/.style={before row=\hline,after row=\hline},
+                every last row/.style={after row=\hline},
+                every first column/.style={column type/.add={|}{}},
+                every last column/.style={column type/.add={}{|}},
+               fixed zerofill,
+               precision=0,
+               columns={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+               col sep=space,
+               ]{confusion/knn_8.csv}
+        \end{table}
+
+        \begin{table}
+            \centering
+            \caption{KNN\_16}
+            \pgfplotstabletypeset[
+                column type=l,
+                every head row/.style={before row=\hline,after row=\hline},
+                every last row/.style={after row=\hline},
+                every first column/.style={column type/.add={|}{}},
+                every last column/.style={column type/.add={}{|}},
+               fixed zerofill,
+               precision=0,
+               columns={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+               col sep=space,
+               ]{confusion/knn_16.csv}
+               \centering
+            \caption{KNN\_32}
+            \pgfplotstabletypeset[
+                column type=l,
+                every head row/.style={before row=\hline,after row=\hline},
+                every last row/.style={after row=\hline},
+                every first column/.style={column type/.add={|}{}},
+                every last column/.style={column type/.add={}{|}},
+               fixed zerofill,
+               precision=0,
+               columns={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+               col sep=space,
+               ]{confusion/knn_32.csv}
+        \end{table}
+        
+        
+        \begin{table}
+            \centering
+            \caption{KNN\_64}
+            \pgfplotstabletypeset[
+                column type=l,
+                every head row/.style={before row=\hline,after row=\hline},
+                every last row/.style={after row=\hline},
+                every first column/.style={column type/.add={|}{}},
+                every last column/.style={column type/.add={}{|}},
+               fixed zerofill,
+               precision=0,
+               columns={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14},
+               col sep=space,
+               ]{confusion/knn_64.csv}
+        \end{table}
 
 %\section{Your Best Configuration (30 pts)}
     %\begin{itemize}

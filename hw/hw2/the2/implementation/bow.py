@@ -37,9 +37,10 @@ edgeThreshold = 10
 sigma = 1.6
 
 # BOF Pipeline Params
-knn_k = 16 # nearest neighbor parameter for test-imgs
 kmeans_k = 128 # kmeans
-kmeans_iters = 30
+kmeans_iters = 15
+# Classification param
+knn_k = 8 # nearest neighbor parameter for test-imgs
 
 
 #   sift = cv2.xfeatures2d.SIFT_create(
@@ -199,8 +200,7 @@ for c in class_ids:
 N_test = len(desc_imgs_test) # 1500, number of imgs in test set 15x100
 
 
-test_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
-test_acc[-1] = [0,0] # NOT-FOUND class
+
 
 bow_repr_test = np.zeros((N_test, kmeans_k), dtype=np.float32)
 for i,desc in enumerate(desc_imgs_test):
@@ -239,7 +239,14 @@ for i,desc in enumerate(desc_imgs):
 
 # TEST ACC.
 # vote wrt closest nns and generate class predictions
+test_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
+test_acc[-1] = [0,0] # NOT-FOUND class
+
 test_preds = knn(bow_repr_normzd, bow_repr_test_normzd, k=knn_k, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db
+
+C = len(classes)
+test_conf = np.zeros((C, C), np.int) # confusion matrix
+
 for i,desc in enumerate(desc_imgs_test):
     voted_imgs = [x[0] for x in test_preds[i]]
     voted_classes = [desc_imgs[x][0] for x in voted_imgs]
@@ -247,6 +254,7 @@ for i,desc in enumerate(desc_imgs_test):
     ground_truth = desc_imgs_test[i][0]
     test_acc[ground_truth][0] += (prediction==ground_truth)
     test_acc[ground_truth][1] += 1
+    test_conf[ground_truth][prediction] +=1 # confusion matrix actual vs preds
 
 def avg_acc(class_acc):
     # accuracy excluding undef class

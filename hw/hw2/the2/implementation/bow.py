@@ -81,6 +81,12 @@ for c in class_ids:
 
 # stack sift-vectors
 desc_stack = np.vstack([dsc[2] for dsc in desc_imgs])
+# sample rows from desc_stack, otherwise it's too computationally expensive in kmeans computation
+# number_of_rows = desc_stack.shape[0] # 128
+# sample_coeff = 0.5
+# sample_cols = int(desc_stack.shape[0]*sample_coeff)
+# random_indices = np.random.choice(number_of_rows, size=sample_cols, replace=False)
+# desc_stack_sampled = desc_stack[random_indices]
 
 # k-means cluster desc_stack => sift vector vocab/dictionary
 # cluster-center dictionary
@@ -89,7 +95,6 @@ from sklearn import cluster
 k = 128 # 3 dk surdu
 iters = 15
 print("ok")
-# clusters = cluster.MiniBatchKMeans(n_clusters=k, random_state=0).fit(desc_stack) 
 codebook, dist = kmeans(desc_stack, k, iters)
 print("ok-1")
 

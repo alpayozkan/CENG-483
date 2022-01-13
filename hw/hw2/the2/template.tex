@@ -187,28 +187,40 @@ Please fill in the sections below only with the requested information. If you ha
             \hline
             Accuracy (1.0) & grid\_size & keypoint\_diameter & offset \\
             \hline
-            - & 8 & 4 & 4 \\ % 4x4
-            - & 16 & 4 & 4 \\ % 2x2
-            - & 32 & 4 & 4 \\ % 1x1
+            0.27 & 8 & 4 & 4 \\ % default
             \hline
             \hline
-            - & 8 & 1 & 4 \\ 
-            - & 8 & 4 & 4 \\ 
-            - & 8 & 10 & 4 \\ 
+            0.20 & 16 & 4 & 4 \\ % 2x2
+            0.12 & 32 & 4 & 4 \\ % 1x1
             \hline
             \hline
-            - & 8 & 10 & 0 \\ 
-            - & 8 & 10 & 4 \\ 
-            - & 8 & 10 & 8 \\ 
+            0.07 & 8 & 0.1 & 4 \\ 
+            0.14 & 8 & 1 & 4 \\ 
+            0.20 & 8 & 10 & 4 \\ 
+            \hline
+            \hline
+            0.25 & 8 & 4 & 0 \\ 
+            0.27 & 8 & 4 & 2 \\ 
+            0.25 & 8 & 4 & 8 \\ 
             \hline
         \end{tabular}
         
         \vspace*{0.5cm}
-        
+
         In Dense-Sift, it's mentioned only grid-size parameter, but in order to extract key points at certain locations, we have to pass a keypoint diameter.
         Hence, I've parametrised over grid-size, keypoint-diameter, and also an offset value to skip edge pixels and focus on inner part of the image as part of the experimentation.
-
-
+        \\~\\
+        Firstly, grid-size parameter adjusts spatiality of our sift descriptors, as expected as spatiality decreases we get less accuracy.
+        Grid-size 8 has resulted in the best accuracy, whereas grid-size 32 with only one keypoint has very poor accuracy.
+        However, if we have too little grid-size s like 1x1, I would expect not a very good accuracy, because too much unnecessary keypoints would overwhelm our classification leaving less emphasis on important keypoints.
+        \\~\\
+        Secondaly, keypoint-diameter adjusts the radius of the keypoint at that (x,y) location. In other words, it corresponds to the diameter of the keypoint circles.
+        As it's illustrated in our experiment that too low and too high keypoint-diameters result in less accuracy. This parameter is also in a way correlated with grid-size, because as our grid-sizes decrease
+        our key-point diameter should also be decreased, because otherwise it wouldn't be meaning to have large circles overflowing smaller grids.
+        \\~\\
+        Thirdly, offset value is how much we skip from edges of an image.
+        It is a reasonable assumption that some pixels from edge are not that interesting and we focus more on inner part of the image.
+        Our observations make sense, when we increase offset too much we get less accuracy due to information loss, however by tuning the parameter we can increase accuracy with around 1-2 points.
 
     \end{center}
 
@@ -220,6 +232,25 @@ Please fill in the sections below only with the requested information. If you ha
         \item Put your quantitative results (classification accuracy) regarding 3 different parameter configurations for the BoF pipeline here. Discuss possible reasons for each one's relatively better/worse accuracy. You are suggested to keep $k \leq 1024$ in k-means to keep experiment durations managable. You need to use the best feature extractor you obtained in the previous part together with the same classifier.
     \end{itemize}
 
+    \begin{center}
+        \raggedright
+        I've implemented BoF through several steps. Firstly, I've iterated over all images and extracted their sift vectors/descriptors as in the from (m, 128) where m is the number of detected keypoints and 128 is the length of the sift vector.
+        If there was no sift-vector which happened rarely, I've added a null vector with all zeros in the form of (1,128) to describe that case, in order to comply with the general BoF model.
+        Then, I've saved all of these sift descriptors for each image which we now the class due to training set. Then I've stacked all of these vectors of images all together, and applied kmeans with k=128 and iters=15.
+        That gives me a codebook of size (128,128) where we have 128 many centroids of sift vectors of size 128.
+        I've implemented my own knn algorithm to get k-nearest neighbors of sift descriptors.
+        Also, I used my own knn implementation to get 1-nn for bag of words representation calculation, where I assign sift descriptors of an image to its neares centroid in the codebook 
+        and I keep a statistics or histogram of these codebooks/bins for each image.
+        Then I normalize these histogram such that each image codebook histogram sums to 1, aka l-1 norm.
+        In the second phase, I calculate accuracy over test-set and I apply the same stages as I did in training namely
+        extracting sift vectors, assigning vectors to centroids, and calculation normalized bow representations for each test image.
+        Then, I run knn over normalized test image bow representation wrt normalized training image bow representation with k=8 as required to get 8 neares neighbor 
+        and I take the dominant class out of these votes to make a prediction. Finally, I calculate my test accuracy since I've the labels.
+        \\~\\
+        
+
+    \end{center}
+    
 
 \section{Classification (30 pts)}
     \begin{itemize}

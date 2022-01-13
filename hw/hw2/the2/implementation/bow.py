@@ -25,7 +25,7 @@ def custom_sift(sift, img, is_dense=False, grid_size=1, radius=4, offset=0):
 
 # DENSE
 is_dense = True
-grid_size = 8
+grid_size = 4
 radius = 4
 offset = 4
 
@@ -35,6 +35,12 @@ nOctaveLayers = 3
 contrastThreshold = 0.04
 edgeThreshold = 10
 sigma = 1.6
+
+# BOF Pipeline Params
+knn_k = 16 # nearest neighbor parameter for test-imgs
+kmeans_k = 128 # kmeans
+kmeans_iters = 30
+
 
 #   sift = cv2.xfeatures2d.SIFT_create(
 #      nfeatures=nfeatures,
@@ -82,20 +88,19 @@ for c in class_ids:
 # stack sift-vectors
 desc_stack = np.vstack([dsc[2] for dsc in desc_imgs])
 # sample rows from desc_stack, otherwise it's too computationally expensive in kmeans computation
-# number_of_rows = desc_stack.shape[0] # 128
-# sample_coeff = 0.5
-# sample_cols = int(desc_stack.shape[0]*sample_coeff)
-# random_indices = np.random.choice(number_of_rows, size=sample_cols, replace=False)
-# desc_stack_sampled = desc_stack[random_indices]
+number_of_rows = desc_stack.shape[0] # 128
+sample_coeff = 0.7
+sample_cols = int(desc_stack.shape[0]*sample_coeff)
+random_indices = np.random.choice(number_of_rows, size=sample_cols, replace=False)
+desc_stack = desc_stack[random_indices]
 
 # k-means cluster desc_stack => sift vector vocab/dictionary
 # cluster-center dictionary
 from scipy.cluster.vq import kmeans, vq
 from sklearn import cluster 
-k = 128 # 3 dk surdu
-iters = 15
+
 print("ok")
-codebook, dist = kmeans(desc_stack, k, iters)
+codebook, dist = kmeans(desc_stack, kmeans_k, kmeans_iters)
 print("ok-1")
 
 
@@ -140,7 +145,7 @@ def knn(db, query, k=1, dmetric_id=0):
 # BOF extraction
 N = len(desc_imgs) # 6000, number of imgs in train set 15x400=6000
 
-bow_repr = np.zeros((N, k), dtype=np.float32)
+bow_repr = np.zeros((N, kmeans_k), dtype=np.float32)
 for i,desc in enumerate(desc_imgs):
     # bow_words, bow_dist = vq(desc[2], codebook) # nearest neighbor implementaiton, own implementation or just 1-nn, en yakin centroid
     bow_words_tups = knn(codebook, desc[2], k=1, dmetric_id=1)
@@ -192,12 +197,12 @@ for c in class_ids:
 
 # Extract bow representations of test imgs
 N_test = len(desc_imgs_test) # 1500, number of imgs in test set 15x100
-k_nn = 8 # neares neighbor parameter
+
 
 test_acc = dict({i: [0,0] for i,s in enumerate(classes)}) # class: (correct, total)
 test_acc[-1] = [0,0] # NOT-FOUND class
 
-bow_repr_test = np.zeros((N_test, k), dtype=np.float32)
+bow_repr_test = np.zeros((N_test, kmeans_k), dtype=np.float32)
 for i,desc in enumerate(desc_imgs_test):
     # bow_words, bow_dist = vq(desc_imgs_test[2], codebook) # nearest neighbor implementaiton, own implementation or just 1-nn, en yakin centroid
     bow_words_tups_test = knn(codebook, desc[2], k=1, dmetric_id=1) # take the closest centroid as word for that sift vector
@@ -234,7 +239,7 @@ for i,desc in enumerate(desc_imgs):
 
 # TEST ACC.
 # vote wrt closest nns and generate class predictions
-test_preds = knn(bow_repr_normzd, bow_repr_test_normzd, k=k_nn, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db
+test_preds = knn(bow_repr_normzd, bow_repr_test_normzd, k=knn_k, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db
 for i,desc in enumerate(desc_imgs_test):
     voted_imgs = [x[0] for x in test_preds[i]]
     voted_classes = [desc_imgs[x][0] for x in voted_imgs]

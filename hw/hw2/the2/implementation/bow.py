@@ -277,3 +277,52 @@ def avg_acc_undef(class_acc):
     return corr/tot
 
 test_acc_avg = avg_acc(test_acc)
+
+
+
+
+####################################
+# TEST-SET (NO, LABELS)
+desc_imgs_TEST = []
+TEST_path = 'the2_test/test/'
+TEST_imgs = os.listdir(TEST_path)
+
+for img_name in TEST_imgs:
+    img_path = TEST_path + img_name
+    img = cv2.imread(img_path)
+    kpts, des = custom_sift(sift, img, is_dense, grid_size, radius, offset)
+    if not isinstance(des, np.ndarray): # NOT_FOUND class, since no descriptor available
+        undef_test +=1
+        empty_des = np.zeros((1, sift.descriptorSize()), np.float32)
+        # alternative approach, NOT_FOUND class [-1]
+        desc_imgs_TEST.append((img_name, empty_des))
+    else:
+        desc_imgs_TEST.append((img_name, des))
+
+N_TEST = len(desc_imgs_TEST) 
+
+bow_repr_TEST = np.zeros((N_TEST, kmeans_k), dtype=np.float32)
+for i,desc in enumerate(desc_imgs_TEST):
+    # bow_words, bow_dist = vq(desc_imgs_test[2], codebook) # nearest neighbor implementaiton, own implementation or just 1-nn, en yakin centroid
+    bow_words_tups_TEST = knn(codebook, desc[1], k=1, dmetric_id=1) # take the closest centroid as word for that sift vector
+    bow_words_TEST = [x[0][0] for x in bow_words_tups_TEST]
+    for word in bow_words_TEST: # for each word of bow repr of img
+        bow_repr_TEST[i][word] += 1  # count number of words selected from bow centroid vectors
+                                # bow_repr[i] => desc_imgs[i] histogram
+
+bow_repr_TEST_norms = np.linalg.norm(bow_repr_TEST,1,axis=1)
+bow_repr_TEST_normzd = (bow_repr_TEST/bow_repr_TEST_norms[:,None]) # (1500,15)
+
+TEST_preds = knn(bow_repr_normzd, bow_repr_TEST_normzd, k=knn_k, dmetric_id=1) # for each test img get knn hists in bow_repr_normzd db
+TEST_pred_dict = dict()
+
+for i,desc in enumerate(desc_imgs_TEST):
+    voted_imgs = [x[0] for x in TEST_preds[i]]
+    voted_classes = [desc_imgs[x][0] for x in voted_imgs]
+    prediction = max(set(voted_classes), key=voted_classes.count) # selects the most frequent/repeated class with democracy
+    TEST_pred_dict[desc[0]] = prediction
+
+inv_class_map = {v: k for k, v in class_ids.items()}
+with open("out_predictions.txt", 'w') as f: 
+    for key, value in TEST_pred_dict.items(): 
+        f.write('%s:%s\n' % (key, inv_class_map[value]))

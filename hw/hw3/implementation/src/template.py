@@ -14,12 +14,13 @@ max_num_epoch = 100
 hps = {'lr':0.001}
 
 # ---- options ----
-DEVICE_ID = 'cpu' # set to 'cpu' for cpu, 'cuda' / 'cuda:0' or similar for gpu.
+DEVICE_ID = 'cuda:0' # set to 'cpu' for cpu, 'cuda' / 'cuda:0' or similar for gpu.
 LOG_DIR = 'checkpoints'
 VISUALIZE = False # set True to visualize input, prediction and the output from the last batch
 LOAD_CHKPT = False
 
 # --- imports ---
+from ast import With
 import torch
 import os
 import matplotlib.pyplot as plt
@@ -32,23 +33,33 @@ import hw3utils
 torch.multiprocessing.set_start_method('spawn', force=True)
 # ---- utility functions -----
 def get_loaders(batch_size,device):
-    data_root = 'ceng483-s19-hw3-dataset' 
+    data_root = '../ceng483-s19-hw3-dataset' # modified this otherwise received error
     train_set = hw3utils.HW3ImageFolder(root=os.path.join(data_root,'train'),device=device)
     train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=0)
     val_set = hw3utils.HW3ImageFolder(root=os.path.join(data_root,'val'),device=device)
     val_loader = torch.utils.data.DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=0)
     # Note: you may later add test_loader to here.
+    # ama ayri test data si yok o zaman valid i parcalicam ?!
+    # test directory sindekiler renkli degil
     return train_loader, val_loader
 
 # ---- ConvNet -----
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 3, 5, padding=2)
+        # burda en fazla 4 conv ?
+        # fcc ?
+        # network 3-4 conv la bu task i cozebilecek mi, baktigim paperdaki network cok daha complex idi
+        self.conv1 = nn.Conv2d(1, 8, 3, padding=1)
+        self.conv2 = nn.Conv2d(8, 8, 3, padding=1)
+        self.conv3 = nn.Conv2d(8, 3, 3, padding=1)
+        self.relu = nn.ReLU()
 
     def forward(self, grayscale_image):
         # apply your network's layers in the following lines:      
-        x = self.conv1(grayscale_image)
+        x = self.relu(self.conv1(grayscale_image))
+        x = self.relu(self.conv2(x))
+        x = self.conv3(x)
         return x
 
 # ---- training code -----
@@ -57,15 +68,18 @@ print('device: ' + str(device))
 net = Net().to(device=device)
 criterion = nn.MSELoss()
 optimizer = optim.SGD(net.parameters(), lr=hps['lr'])
-train_loader, val_loader = get_loaders(batch_size,device)
+train_loader, val_loader = get_loaders(batch_size, device)
 
 if LOAD_CHKPT:
     print('loading the model from the checkpoint')
-    net.load_state_dict(os.path.join(LOG_DIR,'checkpoint.pt')) # model = net, typo
+    path = os.path.join(LOG_DIR,'checkpoint.pt')
+    net.load_state_dict(torch.load(path)) # model = net, typo
     
 print('training begins')
 for epoch in range(max_num_epoch):  
+    
     running_loss = 0.0 # training loss of the network
+    net.train()
     for iteri, data in enumerate(train_loader, 0):
         inputs, targets = data # inputs: low-resolution images, targets: high-resolution images.
 
@@ -81,13 +95,28 @@ for epoch in range(max_num_epoch):
         running_loss += loss.item()
         print_n = 100 # feel free to change this constant
         if iteri % print_n == (print_n-1):    # print every print_n mini-batches
-            print('[%d, %5d] network-loss: %.3f' %
+            print('[%d, %5d] train-loss: %.3f' %
                   (epoch + 1, iteri + 1, running_loss / 100))
             running_loss = 0.0
             # note: you most probably want to track the progress on the validation set as well (needs to be implemented)
 
         if (iteri==0) and VISUALIZE: 
             hw3utils.visualize_batch(inputs,preds,targets)
+
+
+    running_loss_valid = 0.0 # validation loss
+    net.eval()
+    with torch.no_grad():
+        for iteri, data in enumerate(val_loader, 0):
+            inputs, targets = data # inputs: low-resolution images, targets: high-resolution images.
+            preds = net(inputs)
+            loss = criterion(preds, targets)
+            running_loss_valid += loss.item()
+            print_n = 100 # feel free to change this constant
+            if iteri % print_n == (print_n-1):    # print every print_n mini-batches
+                print('[%d, %5d] valid-loss: %.3f' %
+                    (epoch + 1, iteri + 1, running_loss_valid / 100))
+                running_loss_valid = 0.0
 
     print('Saving the model, end of epoch %d' % (epoch+1))
     if not os.path.exists(LOG_DIR):

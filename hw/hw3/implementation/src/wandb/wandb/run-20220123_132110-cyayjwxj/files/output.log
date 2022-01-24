@@ -1,0 +1,28 @@
+device: cpu
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already up-to-date: wandb in /home/pumpkin/.local/lib/python3.8/site-packages (0.12.9)
+Requirement already satisfied, skipping upgrade: pathtools in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (0.1.2)
+Requirement already satisfied, skipping upgrade: yaspin>=1.0.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (2.1.0)
+Requirement already satisfied, skipping upgrade: promise<3,>=2.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (2.3)
+Requirement already satisfied, skipping upgrade: requests<3,>=2.0.0 in /usr/lib/python3/dist-packages (from wandb) (2.22.0)
+Requirement already satisfied, skipping upgrade: subprocess32>=3.5.3 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (3.5.4)
+Requirement already satisfied, skipping upgrade: configparser>=3.8.1 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (5.2.0)
+Requirement already satisfied, skipping upgrade: PyYAML in /usr/lib/python3/dist-packages (from wandb) (5.3.1)
+Requirement already satisfied, skipping upgrade: shortuuid>=0.5.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (1.0.8)
+Requirement already satisfied, skipping upgrade: protobuf>=3.12.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (3.13.0)
+Requirement already satisfied, skipping upgrade: six>=1.13.0 in /usr/local/lib/python3.8/dist-packages (from wandb) (1.15.0)
+Requirement already satisfied, skipping upgrade: docker-pycreds>=0.4.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (0.4.0)
+Requirement already satisfied, skipping upgrade: psutil>=5.0.0 in /usr/local/lib/python3.8/dist-packages (from wandb) (5.7.3)
+Requirement already satisfied, skipping upgrade: python-dateutil>=2.6.1 in /usr/lib/python3/dist-packages (from wandb) (2.7.3)
+Requirement already satisfied, skipping upgrade: sentry-sdk>=1.0.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (1.5.3)
+Requirement already satisfied, skipping upgrade: GitPython>=1.0.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from wandb) (3.1.26)
+Requirement already satisfied, skipping upgrade: Click!=8.0.0,>=7.0 in /usr/lib/python3/dist-packages (from wandb) (7.0)
+Requirement already satisfied, skipping upgrade: termcolor<2.0.0,>=1.1.0 in /home/pumpkin/.local/lib/python3.8/site-packages (from yaspin>=1.0.0->wandb) (1.1.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/local/lib/python3.8/dist-packages (from protobuf>=3.12.0->wandb) (49.1.0)
+Requirement already satisfied, skipping upgrade: certifi in /usr/lib/python3/dist-packages (from sentry-sdk>=1.0.0->wandb) (2019.11.28)
+Requirement already satisfied, skipping upgrade: urllib3>=1.10.0 in /usr/lib/python3/dist-packages (from sentry-sdk>=1.0.0->wandb) (1.25.8)
+Requirement already satisfied, skipping upgrade: gitdb<5,>=4.0.1 in /home/pumpkin/.local/lib/python3.8/site-packages (from GitPython>=1.0.0->wandb) (4.0.9)
+Requirement already satisfied, skipping upgrade: smmap<6,>=3.0.1 in /home/pumpkin/.local/lib/python3.8/site-packages (from gitdb<5,>=4.0.1->GitPython>=1.0.0->wandb) (5.0.0)
+[33mWARNING: You are using pip version 20.2.4; however, version 21.3.1 is available.
+[33mYou should consider upgrading via the '/usr/bin/python3 -m pip install --upgrade pip' command.
+wandb: WARNING Calling wandb.login() after wandb.init() has no effect.

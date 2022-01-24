@@ -1,0 +1,28 @@
+Net(
+  (conv1): Conv2d(1, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (conv2): Conv2d(8, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (conv3): Conv2d(8, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (conv4): Conv2d(8, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (relu): ReLU()
+)
+training begins
+Epochs 1 Train loss: 0.010 Valid loss: 0.009
+Saving the model, end of epoch 1
+Epochs 2 Train loss: 0.009 Valid loss: 0.008
+Saving the model, end of epoch 2
+Epochs 3 Train loss: 0.008 Valid loss: 0.008
+Saving the model, end of epoch 3
+Epochs 4 Train loss: 0.008 Valid loss: 0.008
+Saving the model, end of epoch 4
+Epochs 5 Train loss: 0.008 Valid loss: 0.008
+Saving the model, end of epoch 5
+Epochs 6 Train loss: 0.008 Valid loss: 0.007
+Saving the model, end of epoch 6
+Epochs 7 Train loss: 0.007 Valid loss: 0.007
+Saving the model, end of epoch 7
+Epochs 8 Train loss: 0.007 Valid loss: 0.007
+Saving the model, end of epoch 8
+Epochs 9 Train loss: 0.006 Valid loss: 0.006
+Saving the model, end of epoch 9
+device: cuda:0
+[34m[1mwandb[39m[22m: [33mWARNING[39m Calling wandb.login() after wandb.init() has no effect.

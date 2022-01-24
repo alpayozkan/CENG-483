@@ -18,6 +18,8 @@
 \usepackage{epstopdf}
 
 \usepackage[section]{placeins}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \topmargin=-1.8cm
 \addtolength{\textheight}{6.5cm}
@@ -98,14 +100,27 @@ Please fill in the sections below only with the requested information. If you ha
         problem is not very difficult, we are trying to colorize the facial images and also train data and valid data are very similar and balanced.
         So it's expected to get similar curves for both valid-loss and train-loss.
         \\
-        Common Hyperparameter Baseline in Exp: learning-rate = 0.001, batch-size = 16, epoch = 100
+        Common Hyperparameter Baseline in Exp: \\
+        learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-num=8, kernel-size=3
         \\~\\
 
         2-4 conv layers different kernel sizes 3 5 tried
         for both 2-4 conv 5 kernel has less loss why? pooling effect with 5 kernel ?
         img 80x80x3 reminder
-        
-        Common Hyperparameter Baseline in Exp: learning-rate = 0.001, batch-size = 16, epoch = 100
+        \\
+        Common Hyperparameter Baseline in Exp: \\
+        learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-num=8
+        \\~\\
+        2-4 conv layers different number of kernels 2 4 8 tried
+        \\
+        Common Hyperparameter Baseline in Exp: \\
+        learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-size=5
+        \\~\\
+        conv 2-4
+        learning rates 1 0.1 0.01 0.001 0.0001
+        \\
+        Common Hyperparameter Baseline in Exp: \\
+        learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-num=8, kernel-size=5
 
     
     \end{center}
@@ -124,6 +139,30 @@ Please fill in the sections below only with the requested information. If you ha
         \label{fig:conv_kernels}
     \end{figure}
 
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=1\textwidth]{figures/conv_num_kernels.png}
+        \caption{Effect of Different Number of Kernels}
+        \label{fig:conv_num_kernels}
+    \end{figure}
+
+    \begin{figure}[!htb]
+        \centering
+        \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{figures/learning_rate/conv_lr_train.png}
+          \caption{Train Loss}
+          \label{fig:lr_sub1}
+        \end{subfigure}%
+        \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{figures/learning_rate/conv_lr_valid.png}
+          \caption{Valid Loss}
+          \label{fig:lr_sub2}
+        \end{subfigure}
+        \caption{Effect of Different Learning Rate}
+        \label{fig:conv_lr}
+        \end{figure}
 
 
 

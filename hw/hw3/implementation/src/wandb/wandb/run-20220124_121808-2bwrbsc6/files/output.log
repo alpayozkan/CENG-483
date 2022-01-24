@@ -206,3 +206,4 @@ Epochs 99 Train loss: 0.001 Valid loss: 0.001
 Saving the model, end of epoch 99
 Epochs 100 Train loss: 0.001 Valid loss: 0.001
 Saving the model, end of epoch 100
+Finished Training

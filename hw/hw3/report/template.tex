@@ -92,7 +92,7 @@ Please fill in the sections below only with the requested information. If you ha
     \begin{center}
         \raggedright
         As number of convolutional layers increases, the network capacity increases. Hence, model can fit to data more strictly.
-        Learning the model with 4-convolution requires more time, since capacity is much greater than 2-conv and 1-conv networks and we can observe this phenomenon in figure \ref*{fig:conv_layers}
+        Learning the model with 4-convolution requires more time, since capacity is much greater than 2-conv and 1-conv networks and we can observe this phenomenon in Figure-\ref*{fig:conv_layers}
         where red curve decreases slower than green and orange curves. One interesting observation is that why 4-conv has more train-loss than lower capacity networks, since theoretically it has more capacity
         to overfit/memorize the train-data, the reason is that probably we haven't gave him enough epochs to memorize the train-data since max-epochs is restricted to be 100. 
         However, my observation is that after 20-40 epochs, rate of change of 4-conv is greater than 2-conv and 1-conv meaning that 
@@ -103,7 +103,7 @@ Please fill in the sections below only with the requested information. If you ha
         Common Hyperparameter Baseline in Exp: \\
         learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-num=8, kernel-size=3
         \\~\\
-
+        I've experimented with different kernel sizes of 3 and 5.
         2-4 conv layers different kernel sizes 3 5 tried
         for both 2-4 conv 5 kernel has less loss why? pooling effect with 5 kernel ?
         img 80x80x3 reminder
@@ -171,29 +171,30 @@ Please fill in the sections below only with the requested information. If you ha
     \begin{center}
         \raggedright
         I compared my results with respect to two baselines for different number of convolutional layers, 4-conv and 2-conv.
-        Overall, my observations are aligned for both 2-conv and 4-conv.
+        Overall, my observations are aligned for both 2-conv and 4-conv. All of the experiments in this part are summarized in Figure-\ref*{fig:part-2} with following abbreviations; bn: batch-norm experiment, tanh: tanh experiment, c16: 16 channel experiment. 2-conv and 4-conv stands for 2 and 4 conv layer NN respectively.
         \\
         Common Hyperparameter Baseline in Exp: \\
         learning-rate = 0.1, batch-size = 16, epoch = 100, kernel-size=5
         \\~\\
-        BatchNorm2d decreased error for both 2-conv and 4-conv, its loss is the highest among all observations in Figure-\ref*{fig:part-2}.
-        The reason might be because, the input and ouput data are alread somewhat scaled between the interval of [-1,1], so model doesn't have any benefit in this configuration.
-        However, it might have some regularization effect on the weights and as a result increasing the loss.
+        Usually, batch-norm increases the performance of NN since scaling eases optimization during learning.
+        However, BatchNorm2d increased mse loss for both 2-conv and 4-conv, its loss is the highest among all observations in Figure-\ref*{fig:part-2}.
+        The reason might be because, the input and ouput data are already scaled to the interval of [-1,1], so model doesn't have any benefit in this configuration.
+        However, it has some regularization effect on the weights and as a result it requires more data for training and increases the loss.
         Therefore, I don't see much of a benefit for batch-norm and I'm not planning to keep it under this configuration.
         \\~\\
-        I've expected tanh to improve the model's accuracy, decreasing loss. I've observed in Figure-\ref*{fig:part-2} that
+        I've expected tanh to improve the model's accuracy and decreasing the loss. I've observed in Figure-\ref*{fig:part-2} that
         for 4-conv tanh decreases the loss as expected, however for conv-2 the behaviour is opposite, the loss is higher than 2-conv-base.
         This might be because of the fact that, when we change the network, even 1 single additional activation function yields another different optimization problem,
         hence our baseline hyperparameters eg. learning-rate might not be the optimal for that configuration.
-        In addition, these loss curves correspond to avg loss per pixel and also all of these individual pixel values are scaled to the interval of [-1,1]  which is relatively small. Hence all of these models results in a very low mse loss value
+        In addition, these loss curves correspond to avg loss per pixel and also all of these individual pixel values are scaled to the interval of [-1,1]  which is relatively small. Hence all of these models result in a very low mse loss value
         and loss differences between the models are marginal, so we need to make use of accuracy checking mechanisms like 12-margin and also manual image inspection.
         For example, I observe that applying tanh in both 2-conv and 4-conv has removed exploding pixel values eg. small blue segments in the image which is an improvement, but not directly visible in mse loss.
-        Tanh works because we are squeezing our network's output to [-1,1] and our labels are also in this range. However, if we didn't apply tanh to conv output, it would be unbounded
+        Tanh works because we are squeezing our network's output to [-1,1] and our labels are also in this range. However, if we didn't apply tanh to conv output, it would be theoretically unbounded
         which could be more difficult to learn, in a way we are guiding the network to learn better since we have prior knowledge about our ground truth interval.
         \\~\\
         Number of channels or number of kernels that I've experimented with so far were 2, 4, and 8 as mentioned in the HW description.
         In this experiment, I've set channel-out=16 for all conv layers except for the last one which had to be 3 (r,g,b).
-        I've expected a higher channel to decrease the loss and this phenomenon is observable in Figure-\ref*{fig:part-2} where
+        I've expected a higher channel number to decrease the loss and this phenomenon is observable in Figure-\ref*{fig:part-2} where
         losses are the lowest among all of the models in this part for both 4-conv and 2-conv.
         Having higher number of channels/kernels gives our model more capacity to extract more different features from images
         and the model makes use of more of these features to fit the problem/data in a better way as a result decreasing the loss.

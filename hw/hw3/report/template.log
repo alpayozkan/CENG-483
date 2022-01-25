@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.12)  24 JAN 2022 20:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.12)  25 JAN 2022 12:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -468,65 +468,52 @@ Non-PDF special ignored!
 File: figures/conv_layers.png Graphic file (type png)
 <use figures/conv_layers.png>
 Package pdftex.def Info: figures/conv_layers.png  used on input line 130.
-(pdftex.def)             Requested size: 500.48398pt x 218.42688pt.
+(pdftex.def)             Requested size: 375.36298pt x 163.81859pt.
 <figures/conv_kernels.png, id=37, 954.56625pt x 409.53pt>
 File: figures/conv_kernels.png Graphic file (type png)
 <use figures/conv_kernels.png>
 Package pdftex.def Info: figures/conv_kernels.png  used on input line 137.
-(pdftex.def)             Requested size: 500.48398pt x 214.71277pt.
+(pdftex.def)             Requested size: 375.36298pt x 161.03458pt.
 <figures/conv_num_kernels.png, id=38, 956.57375pt x 413.545pt>
 File: figures/conv_num_kernels.png Graphic file (type png)
 <use figures/conv_num_kernels.png>
 Package pdftex.def Info: figures/conv_num_kernels.png  used on input line 144.
-(pdftex.def)             Requested size: 500.48398pt x 216.36977pt.
-<figures/learning_rate/conv_lr_train.png, id=39, 719.68875pt x 484.81125pt>
-File: figures/learning_rate/conv_lr_train.png Graphic file (type png)
-<use figures/learning_rate/conv_lr_train.png>
-Package pdftex.def Info: figures/learning_rate/conv_lr_train.png  used on input line 153.
-(pdftex.def)             Requested size: 250.24199pt x 168.56943pt.
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 156.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
-File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-)
-LaTeX Font Info:    Trying to load font information for U+msa on input line 156.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 156.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<figures/learning_rate/conv_lr_valid.png, id=40, 710.655pt x 488.82625pt>
-File: figures/learning_rate/conv_lr_valid.png Graphic file (type png)
-<use figures/learning_rate/conv_lr_valid.png>
-Package pdftex.def Info: figures/learning_rate/conv_lr_valid.png  used on input line 159.
-(pdftex.def)             Requested size: 250.24199pt x 172.12852pt.
- [2 </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/conv_layers.png>] [3 </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/conv_kernels.png> </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/conv_num_kernels.png>] [4 </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/learning_rate/conv_lr_train.png> </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/learning_rate/conv_lr_valid.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 203.
- [5
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 203.
+(pdftex.def)             Requested size: 375.36298pt x 162.27258pt.
+<figures/learning_rate/conv_lr.png, id=39, 1423.3175pt x 573.14125pt>
+File: figures/learning_rate/conv_lr.png Graphic file (type png)
+<use figures/learning_rate/conv_lr.png>
+Package pdftex.def Info: figures/learning_rate/conv_lr.png  used on input line 151.
+(pdftex.def)             Requested size: 375.36298pt x 151.14708pt.
+ [2 </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/conv_layers.png> </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/conv_kernels.png>] [3 </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/conv_num_kernels.png> </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/learning_rate/conv_lr.png>]
+<figures/part-2.png, id=56, 1420.30624pt x 592.2125pt>
+File: figures/part-2.png Graphic file (type png)
+<use figures/part-2.png>
+Package pdftex.def Info: figures/part-2.png  used on input line 206.
+(pdftex.def)             Requested size: 375.36298pt x 156.51085pt.
+ [4 </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/part-2.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 233.
+ [5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 233.
  (/home/pumpkin/.git/CENG-483/hw/hw3/report/template.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 203.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 203.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 233.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 233.
 Package rerunfilecheck Info: File `template.out' has not changed.
 (rerunfilecheck)             Checksum: 3388137C1DC044985C8BFDC1B237C21F;343.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 203.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 233.
  ) 
 Here is how much of TeX's memory you used:
- 10362 strings out of 481239
- 156460 string characters out of 5920376
+ 10296 strings out of 481239
+ 155206 string characters out of 5920376
  614674 words of memory out of 5000000
- 25410 multiletter control sequences out of 15000+600000
- 539462 words of font info for 52 fonts, out of 8000000 for 9000
+ 25368 multiletter control sequences out of 15000+600000
+ 534797 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,8n,42p,538b,492s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,6n,42p,538b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on /home/pumpkin/.git/CENG-483/hw/hw3/report/template.pdf (5 pages, 395501 bytes).
+Output written on /home/pumpkin/.git/CENG-483/hw/hw3/report/template.pdf (5 pages, 555301 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
- 15 named destinations out of 1000 (max. 500000)
+ 94 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
+ 16 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

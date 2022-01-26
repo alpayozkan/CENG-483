@@ -103,24 +103,40 @@ Please fill in the sections below only with the requested information. If you ha
         Common Hyperparameter Baseline in Exp: \\
         learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-num=8, kernel-size=3
         \\~\\
-        I've experimented with different kernel sizes of 3 and 5.
-        2-4 conv layers different kernel sizes 3 5 tried
-        for both 2-4 conv 5 kernel has less loss why? pooling effect with 5 kernel ?
-        img 80x80x3 reminder
+
+        I've experimented with different kernel sizes of 3 and 5 for both 2-conv and 4-conv networks.
+        For both of these models 5x5 kernel yields better performance than 3x3 kernel as illustrated in Figure-\ref*{fig:conv_kernels}.
+        Higher spatiality with larger kernels for convolution improves performance in this task. 
+        The optimal kernel size depends on the problem and the configuration, however in this problem higher spatiality over kernels allows us to get better estimations
+        for the face pixels.
         \\
         Common Hyperparameter Baseline in Exp: \\
         learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-num=8
         \\~\\
-        2-4 conv layers different number of kernels 2 4 8 tried
+
+        Number of kernels or output channels of convolutions determine how many activation maps we are going to create as a result of convolution.
+        Each convolution operation with a single kernel yields one activation map and we can obtain multiple activation maps by convolving img with different learned kernels.
+        This allows our model to capture different features or patterns out of fed images. Thus, we have more powerful feature representation and more model complexity which
+        is expected to increase the model performance or decrease the loss. 
+        In this experiment, observations confirm my expectations in the sense that models with higher number of activation maps yield better performance for both 2-conv and 4-conv: 8,4,2 respectively.
+        When we analyze convs separately, in the order of increasing performance: 2-conv: 2-conv-2ks, 2-conv-4ks, 2-conv-8ks and 4-conv: 4-conv-2ks, 4-conv-4ks, 4-conv-8ks. 
         \\
         Common Hyperparameter Baseline in Exp: \\
         learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-size=5
         \\~\\
-        conv 2-4
-        learning rates 1 0.1 0.01 0.001 0.0001
+
+        Learning rate determines the scale of update in gradient descent. 
+        In this experiment I've tried several learning rates: 1, 0.1, 0.01, 0.001, 0.0001 respectively for both 2-conv and 4-conv.
+        I've obtained similar observations for both 2-conv and 4-conv. Larger learning rates except for 1.0 has resulted in better accuracy.
+        Learning rates in the order of performance: 0.1, 0.01, 0.001, 0.0001, 1.0.
+        Learning rate 0.1 is the best, but lr=1.0 is too much and it diverges our nn resulting in NAN loss values.
+        For this task, my choice would be lr=0.1 with its superior performance when compared to other learning rates.
+        Theoretically, small learning rates should converge, but they usually require more training time since having small updates requires many steps to make a significant effect in the optimization.
+        However, these experiments are bounded with max-epoch=100, hence we cannot observe smaller learning rates converging as low as higher learning rates.
+        Higher learning rates like 0.1 (not as extreme as 1.0) would be a plausible lr choice for better performance, because our data is scaled and we backpropagate small loss values and we have max-epoch restriction.
         \\
         Common Hyperparameter Baseline in Exp: \\
-        learning-rate = 0.001, batch-size = 16, epoch = 100, kernel-num=8, kernel-size=5
+        batch-size = 16, epoch = 100, kernel-num=8, kernel-size=5
 
     
     \end{center}

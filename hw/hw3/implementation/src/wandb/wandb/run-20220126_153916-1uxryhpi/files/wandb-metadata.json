@@ -1,0 +1,24 @@
+{
+    "os": "Darwin-20.6.0-x86_64-i386-64bit",
+    "python": "3.7.11",
+    "heartbeatAt": "2022-01-26T12:39:18.414741",
+    "startedAt": "2022-01-26T12:39:16.012187",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "-f",
+        "/Users/alpayozkan/Library/Jupyter/runtime/kernel-b687af14-c0e8-44de-bef5-511edc422e7a.json"
+    ],
+    "state": "running",
+    "program": "vision_conv_exp_wandb.ipynb",
+    "root": "/Users/alpayozkan/git/CENG-483",
+    "git": {
+        "remote": "git@github.com:alpayozkan/CENG-483.git",
+        "commit": "a8ab36660d55215a6ea5117da615b2089dbe93e3"
+    },
+    "email": null,
+    "host": "12f4.wls.metu.edu.tr",
+    "username": "alpayozkan",
+    "executable": "/Users/alpayozkan/opt/anaconda3/envs/483/bin/python"
+}

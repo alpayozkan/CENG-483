@@ -1,0 +1,10 @@
+Net(
+  (conv1): Conv2d(1, 8, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(8, 8, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv3): Conv2d(8, 8, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv4): Conv2d(8, 3, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (relu): ReLU()
+)
+training begins
+Epochs 1 Train loss: 0.002 Valid loss: 0.001
+Saving the model, end of epoch 1

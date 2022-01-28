@@ -1,0 +1,42 @@
+Net(
+  (conv1): Conv2d(1, 16, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(16, 3, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (relu): ReLU()
+  (tanh): Tanh()
+)
+training begins
+Epochs 1 Train loss: 0.00101 Valid loss: 0.00076 Valid-Train Diff: -0.00025 Loss-Valid Diff: -inf
+Saving the model, end of epoch 1
+Epochs 2 Train loss: 0.00071 Valid loss: 0.00070 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00006
+Saving the model, end of epoch 2
+Epochs 3 Train loss: 0.00066 Valid loss: 0.00064 Valid-Train Diff: -0.00001 Loss-Valid Diff: -0.00006
+Saving the model, end of epoch 3
+Epochs 4 Train loss: 0.00063 Valid loss: 0.00062 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00002
+Saving the model, end of epoch 4
+Epochs 5 Train loss: 0.00061 Valid loss: 0.00061 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00002
+Saving the model, end of epoch 5
+Epochs 6 Train loss: 0.00060 Valid loss: 0.00060 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00001
+Saving the model, end of epoch 6
+Epochs 7 Train loss: 0.00058 Valid loss: 0.00060 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00001
+Saving the model, end of epoch 7
+Epochs 8 Train loss: 0.00058 Valid loss: 0.00058 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00002
+Saving the model, end of epoch 8
+Epochs 9 Train loss: 0.00057 Valid loss: 0.00057 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00000
+Saving the model, end of epoch 9
+Epochs 10 Train loss: 0.00056 Valid loss: 0.00057 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00001
+Saving the model, end of epoch 10
+Epochs 11 Train loss: 0.00056 Valid loss: 0.00057 Valid-Train Diff: 0.00001 Loss-Valid Diff: 0.00000
+Saving the model, end of epoch 11
+Epochs 12 Train loss: 0.00056 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00001
+Saving the model, end of epoch 12
+Epochs 13 Train loss: 0.00055 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00000
+Saving the model, end of epoch 13
+Epochs 14 Train loss: 0.00055 Valid loss: 0.00055 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00001
+Saving the model, end of epoch 14
+Epochs 15 Train loss: 0.00055 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss-Valid Diff: 0.00000
+Saving the model, end of epoch 15
+Epochs 16 Train loss: 0.00055 Valid loss: 0.00055 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00001
+Saving the model, end of epoch 16
+Early Stopping at epoch: 16
+Loading: checkpoints_best_config_epoch_mech_15/checkpoint_9.pt
+Finished Training

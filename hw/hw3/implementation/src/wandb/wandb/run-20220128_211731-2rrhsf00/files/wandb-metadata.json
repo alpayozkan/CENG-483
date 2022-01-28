@@ -1,0 +1,26 @@
+{
+    "os": "Linux-5.13.0-27-generic-x86_64-with-glibc2.17",
+    "python": "3.8.12",
+    "heartbeatAt": "2022-01-28T18:17:33.706494",
+    "startedAt": "2022-01-28T18:17:31.731038",
+    "docker": null,
+    "gpu": "GeForce GTX 1660 Ti",
+    "gpu_count": 1,
+    "cpu_count": 6,
+    "cuda": null,
+    "args": [
+        "-f",
+        "/home/pumpkin/.local/share/jupyter/runtime/kernel-f0d48e70-b7a6-47d1-97de-2cafff02f7af.json"
+    ],
+    "state": "running",
+    "program": "vision_conv_exp_wandb_best.ipynb",
+    "root": "/home/pumpkin/.git/CENG-483",
+    "git": {
+        "remote": "git@github.com:alpayozkan/CENG-483.git",
+        "commit": "a6d581f8e6cd6a619b79faca6889a99102650c2f"
+    },
+    "email": "omaoma010@gmail.com",
+    "host": "mach",
+    "username": "pumpkin",
+    "executable": "/home/pumpkin/anaconda3/envs/483/bin/python"
+}

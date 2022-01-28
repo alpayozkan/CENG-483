@@ -1,0 +1,307 @@
+Net(
+  (conv1): Conv2d(1, 16, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(16, 3, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (relu): ReLU()
+  (tanh): Tanh()
+)
+training begins
+Epochs 1 Train loss: 0.00103 Valid loss: 0.00075 Valid-Train Diff: -0.00028
+Saving the model, end of epoch 1
+Epochs 2 Train loss: 0.00069 Valid loss: 0.00067 Valid-Train Diff: -0.00002
+Saving the model, end of epoch 2
+Epochs 3 Train loss: 0.00064 Valid loss: 0.00063 Valid-Train Diff: -0.00001
+Saving the model, end of epoch 3
+Epochs 4 Train loss: 0.00062 Valid loss: 0.00062 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 4
+Epochs 5 Train loss: 0.00060 Valid loss: 0.00060 Valid-Train Diff: -0.00000
+Saving the model, end of epoch 5
+Epochs 6 Train loss: 0.00059 Valid loss: 0.00059 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 6
+Epochs 7 Train loss: 0.00058 Valid loss: 0.00058 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 7
+Epochs 8 Train loss: 0.00057 Valid loss: 0.00058 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 8
+Epochs 9 Train loss: 0.00056 Valid loss: 0.00057 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 9
+Epochs 10 Train loss: 0.00056 Valid loss: 0.00056 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 10
+Epochs 11 Train loss: 0.00056 Valid loss: 0.00056 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 11
+Epochs 12 Train loss: 0.00055 Valid loss: 0.00055 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 12
+Epochs 13 Train loss: 0.00055 Valid loss: 0.00055 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 13
+Epochs 14 Train loss: 0.00055 Valid loss: 0.00056 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 14
+Epochs 15 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 15
+Epochs 16 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 16
+Epochs 17 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 17
+Epochs 18 Train loss: 0.00054 Valid loss: 0.00059 Valid-Train Diff: 0.00005
+Saving the model, end of epoch 18
+Epochs 19 Train loss: 0.00054 Valid loss: 0.00054 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 19
+Epochs 20 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 20
+Epochs 21 Train loss: 0.00054 Valid loss: 0.00054 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 21
+Epochs 22 Train loss: 0.00054 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 22
+Epochs 23 Train loss: 0.00053 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 23
+Epochs 24 Train loss: 0.00053 Valid loss: 0.00055 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 24
+Epochs 25 Train loss: 0.00053 Valid loss: 0.00055 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 25
+Epochs 26 Train loss: 0.00053 Valid loss: 0.00055 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 26
+Epochs 27 Train loss: 0.00053 Valid loss: 0.00055 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 27
+Epochs 28 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 28
+Epochs 29 Train loss: 0.00053 Valid loss: 0.00058 Valid-Train Diff: 0.00005
+Saving the model, end of epoch 29
+Epochs 30 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 30
+Epochs 31 Train loss: 0.00053 Valid loss: 0.00055 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 31
+Epochs 32 Train loss: 0.00053 Valid loss: 0.00055 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 32
+Epochs 33 Train loss: 0.00053 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 33
+Epochs 34 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 34
+Epochs 35 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 35
+Epochs 36 Train loss: 0.00053 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 36
+Epochs 37 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 37
+Epochs 38 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 38
+Epochs 39 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 39
+Epochs 40 Train loss: 0.00053 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 40
+Epochs 41 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 41
+Epochs 42 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 42
+Epochs 43 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 43
+Epochs 44 Train loss: 0.00052 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 44
+Epochs 45 Train loss: 0.00053 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 45
+Epochs 46 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 46
+Epochs 47 Train loss: 0.00052 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 47
+Epochs 48 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 48
+Epochs 49 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 49
+Epochs 50 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 50
+Epochs 51 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 51
+Epochs 52 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 52
+Epochs 53 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 53
+Epochs 54 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 54
+Epochs 55 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 55
+Epochs 56 Train loss: 0.00052 Valid loss: 0.00054 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 56
+Epochs 57 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 57
+Epochs 58 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 58
+Epochs 59 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 59
+Epochs 60 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 60
+Epochs 61 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 61
+Epochs 62 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 62
+Epochs 63 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 63
+Epochs 64 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 64
+Epochs 65 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 65
+Epochs 66 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 66
+Epochs 67 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 67
+Epochs 68 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 68
+Epochs 69 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 69
+Epochs 70 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 70
+Epochs 71 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 71
+Epochs 72 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 72
+Epochs 73 Train loss: 0.00052 Valid loss: 0.00055 Valid-Train Diff: 0.00003
+Saving the model, end of epoch 73
+Epochs 74 Train loss: 0.00052 Valid loss: 0.00054 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 74
+Epochs 75 Train loss: 0.00052 Valid loss: 0.00054 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 75
+Epochs 76 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 76
+Epochs 77 Train loss: 0.00052 Valid loss: 0.00055 Valid-Train Diff: 0.00003
+Saving the model, end of epoch 77
+Epochs 78 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 78
+Epochs 79 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 79
+Epochs 80 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 80
+Epochs 81 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 81
+Epochs 82 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 82
+Epochs 83 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 83
+Epochs 84 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 84
+Epochs 85 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 85
+Epochs 86 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 86
+Epochs 87 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 87
+Epochs 88 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 88
+Epochs 89 Train loss: 0.00052 Valid loss: 0.00056 Valid-Train Diff: 0.00005
+Saving the model, end of epoch 89
+Epochs 90 Train loss: 0.00052 Valid loss: 0.00054 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 90
+Epochs 91 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 91
+Epochs 92 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 92
+Epochs 93 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 93
+Epochs 94 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 94
+Epochs 95 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 95
+Epochs 96 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 96
+Epochs 97 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 97
+Epochs 98 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 98
+Epochs 99 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 99
+Epochs 100 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 100
+Epochs 101 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 101
+Epochs 102 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 102
+Epochs 103 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 103
+Epochs 104 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 104
+Epochs 105 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 105
+Epochs 106 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 106
+Epochs 107 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 107
+Epochs 108 Train loss: 0.00051 Valid loss: 0.00054 Valid-Train Diff: 0.00003
+Saving the model, end of epoch 108
+Epochs 109 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 109
+Epochs 110 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 110
+Epochs 111 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 111
+Epochs 112 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 112
+Epochs 113 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 113
+Epochs 114 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 114
+Epochs 115 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 115
+Epochs 116 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 116
+Epochs 117 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 117
+Epochs 118 Train loss: 0.00051 Valid loss: 0.00054 Valid-Train Diff: 0.00003
+Saving the model, end of epoch 118
+Epochs 119 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 119
+Epochs 120 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 120
+Epochs 121 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 121
+Epochs 122 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 122
+Epochs 123 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 123
+Epochs 124 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 124
+Epochs 125 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 125
+Epochs 126 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 126
+Epochs 127 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 127
+Epochs 128 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 128
+Epochs 129 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 129
+Epochs 130 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 130
+Epochs 131 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 131
+Epochs 132 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 132
+Epochs 133 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 133
+Epochs 134 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 134
+Epochs 135 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 135
+Epochs 136 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 136
+Epochs 137 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 137
+Epochs 138 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 138
+Epochs 139 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 139
+Epochs 140 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 140
+Epochs 141 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 141
+Epochs 142 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 142
+Epochs 143 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 143
+Epochs 144 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 144
+Epochs 145 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 145
+Epochs 146 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 146
+Epochs 147 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 147
+Epochs 148 Train loss: 0.00051 Valid loss: 0.00052 Valid-Train Diff: 0.00001
+Saving the model, end of epoch 148
+Epochs 149 Train loss: 0.00051 Valid loss: 0.00051 Valid-Train Diff: 0.00000
+Saving the model, end of epoch 149
+Epochs 150 Train loss: 0.00051 Valid loss: 0.00053 Valid-Train Diff: 0.00002
+Saving the model, end of epoch 150

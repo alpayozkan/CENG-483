@@ -185,3 +185,4 @@ Epochs 89 Train loss: 0.00052 Valid loss: 0.00053 Valid-Train Diff: 0.00001 Loss
 Saving the model, end of epoch 89
 Early Stopping at epoch: 89
 Loading: checkpoints_best_config_epoch_mech_17/checkpoint_82.pt
+Finished Training

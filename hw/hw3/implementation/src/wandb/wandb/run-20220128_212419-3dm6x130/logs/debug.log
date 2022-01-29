@@ -26,3 +26,125 @@ config: {'epochs': 100, 'batch_size': 16, 'learning_rate': 0.1, 'architecture': 
 2022-01-28 21:24:24,982 INFO    MainThread:35526 [wandb_watch.py:watch():43] Watching
 2022-01-28 21:36:43,640 INFO    MainThread:35526 [wandb_init.py:_pause_backend():284] pausing backend
 2022-01-28 21:36:43,640 INFO    MainThread:35526 [jupyter.py:save_ipynb():374] not saving jupyter notebook
+2022-01-29 12:12:34,237 INFO    MainThread:35526 [wandb_run.py:_atexit_cleanup():1780] got exitcode: 0
+2022-01-29 12:12:34,238 INFO    MainThread:35526 [wandb_run.py:_restore():1752] restore
+2022-01-29 12:12:34,527 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 838
+  total_bytes: 838
+}
+
+2022-01-29 12:12:34,830 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 838
+  total_bytes: 838
+}
+
+2022-01-29 12:12:35,128 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 838
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,233 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 838
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,336 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 838
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,440 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 838
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,543 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,649 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,751 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,854 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:35,957 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:36,060 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:36,860 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+
+2022-01-29 12:12:37,446 INFO    MainThread:35526 [wandb_run.py:_wait_for_finish():1912] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 38404
+  total_bytes: 38404
+}
+local_info {
+}
+
+2022-01-29 12:12:38,685 INFO    MainThread:35526 [wandb_run.py:_append_history():2130] rendering history
+2022-01-29 12:12:38,685 INFO    MainThread:35526 [wandb_run.py:_append_summary():2085] rendering summary
+2022-01-29 12:12:38,685 INFO    MainThread:35526 [wandb_run.py:_append_files():2180] logging synced files

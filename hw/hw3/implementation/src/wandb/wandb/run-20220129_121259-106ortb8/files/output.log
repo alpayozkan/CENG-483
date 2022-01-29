@@ -1,0 +1,20 @@
+Net(
+  (conv1): Conv2d(1, 16, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(16, 3, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (relu): ReLU()
+  (tanh): Tanh()
+)
+training begins
+Epochs 1 Train loss: 0.00101 Valid loss: 0.00076 Valid-Train Diff: -0.00025 Loss-Valid Diff: -inf Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000
+Saving the model, end of epoch 1
+Epochs 2 Train loss: 0.00070 Valid loss: 0.00069 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00006 Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000
+Saving the model, end of epoch 2
+Epochs 3 Train loss: 0.00065 Valid loss: 0.00065 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00005 Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000
+Saving the model, end of epoch 3
+Epochs 4 Train loss: 0.00062 Valid loss: 0.00063 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00001 Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000
+Saving the model, end of epoch 4
+Epochs 5 Train loss: 0.00060 Valid loss: 0.00061 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00003 Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000
+Saving the model, end of epoch 5
+Epochs 6 Train loss: 0.00059 Valid loss: 0.00059 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00002 Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000
+Saving the model, end of epoch 6
+Epochs 7 Train loss: 0.00058 Valid loss: 0.00060 Valid-Train Diff: 0.00002 Loss-Valid Diff: 0.00001 Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000

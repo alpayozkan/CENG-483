@@ -39,3 +39,4 @@ Epochs 16 Train loss: 0.00055 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss
 Saving the model, end of epoch 16
 Early Stopping at epoch: 16
 Loading: checkpoints_best_config_epoch_mech_16/checkpoint_11.pt
+Finished Training

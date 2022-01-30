@@ -257,7 +257,27 @@ Using the best model that you obtain, report the following:
         The plot of both training and validation MSE Loss over epochs is illustrated in Figure-\ref*{fig:part-3_best_config_mse_loss} below.
         \\~\\
         The plot of both training and validation 12-Margin Loss over epochs is illustrated in Figure-\ref*{fig:part-3_best_config_12margin_loss} below.
-
+        \\~\\
+        In valid\_imgs directory there are 7 pairs of (pred, label) images.
+        \\~\\
+        The model is very simple and easy to train, it takes around 10 minutes at max for training with gpu.
+        It gives very close results to ground truth images, it doesn't capture every pixel perfectly, however it's still good approximation.
+        Its 12-margin accuracy is around 0.75 (equivalently 0.25 12-margin loss) which is quiet amazing result from such a trivial neural network.
+        However, train set and validation set include similar images and 
+        it's observable from our loss values such that both train and valid 
+        losses are almost similar which diminishes the generalizability of our model.
+        Hence, if the domain of application for this model may contain different data (different images with different face shapes, skin colors etc),
+        then we would need to have a more generic validation set to properly measure the performance of the model.
+        Additionally, this model or NN structure wouldn't work with images of different size, since there's no pooling layer in NN.
+        This also limits the usability and practicality of the model.
+        In order to increase the performance of the model, we need to increase the capacity of the model as well
+        as introduce more training data. As it's clear from learning curves, both train and validation 
+        losses converge around same values. In that case higher network capacity would also increase the gap between validation and training which
+        needs to be reduced through regularization. Hence, I would try \& apply weight-decay and dropout.
+        In order to increase model capacity, I would try increasing the number of kernels for each conv layer as
+        motivated by our previous empirical results. Furthermore, I would try stacking more conv layers with pooling layers in between.
+        In this regard, another disadvantage of the model is that it doesn't sufficiently decrease the spatiality of the propagated tensors throughout convolutions due to padding, limited number of convolutional layers, kernel size, and stride. 
+        Higher spatiality would be helpful to focus on the details of the image sections eg. hair, nose, lips, ears etc.
     \end{center}
 
     \begin{figure}[!htb]
@@ -277,11 +297,21 @@ Using the best model that you obtain, report the following:
 \section{Your Results on the Test Set(30 pts)}
 This part will be obtained by us using the estimations you will provide. Please tell us how should we run your code in case of a problem:
 
+\begin{center}
+\raggedright
+My implementation is a .ipynb python notebook.
+    
+\end{center}
+
 \section{Additional Comments and References}
 
 Throughout this assignment and experiments, I've made use of wandb for data visualization and logging.
 All of my experiments are logged and can be monitored. In case any further inspection is needed check out the following wandb experiment report at url:
 ----<!!>----
+
+my losses are per datapoint not per batch.
+
+
 
 
 

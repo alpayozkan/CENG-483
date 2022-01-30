@@ -252,19 +252,28 @@ Using the best model that you obtain, report the following:
         if we don't have sufficient improvement more than epsilon or if our model's loss increases more than epsilon
         for more than patience number of times then we stop learning and take our model's configuration at the epoch of (current epoch - patience) where
         patience determines the amount of toleration and epsilon is the small difference value that determines whether change should be considered as success or not.
-        I've set epsilon = 5e-6  and patience = 7. The learning has stopped at 89 th epoch which is determined by our mechanism automatically.
+        I've set epsilon = 5e-6  and patience = 5. The learning has stopped at 47 th epoch which is determined by our mechanism automatically.
         \\~\\
-        The plot of both training and validation MSE Loss over epochs is illustrated in Figure-\ref*{fig:part-3_best_config_loss} below.
+        The plot of both training and validation MSE Loss over epochs is illustrated in Figure-\ref*{fig:part-3_best_config_mse_loss} below.
+        \\~\\
+        The plot of both training and validation 12-Margin Loss over epochs is illustrated in Figure-\ref*{fig:part-3_best_config_12margin_loss} below.
 
     \end{center}
 
     \begin{figure}[!htb]
         \centering
-        \includegraphics[width=0.75\textwidth]{figures/best_config_loss.png}
+        \includegraphics[width=0.75\textwidth]{figures/best_config_loss_mse.png}
         \caption{MSE Loss Curves for best configuration}
-        \label{fig:part-3_best_config_loss}
+        \label{fig:part-3_best_config_mse_loss}
     \end{figure}
     
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=0.75\textwidth]{figures/best_config_loss_12margin.png}
+        \caption{12-Margin Loss Curves for best configuration}
+        \label{fig:part-3_best_config_12margin_loss}
+    \end{figure}
+
 \section{Your Results on the Test Set(30 pts)}
 This part will be obtained by us using the estimations you will provide. Please tell us how should we run your code in case of a problem:
 

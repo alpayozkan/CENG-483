@@ -1,0 +1,60 @@
+Net(
+  (conv1): Conv2d(1, 16, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(16, 3, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (relu): ReLU()
+  (tanh): Tanh()
+)
+training begins
+Epochs 1 Train loss: 0.00101 Valid loss: 0.00074 Valid-Train Diff: -0.00026 Loss-Valid Diff: -inf Loss-12margin Train: 0.35502 Loss-12margin Valid: 0.30194
+Saving the model, end of epoch 1
+Epochs 2 Train loss: 0.00069 Valid loss: 0.00068 Valid-Train Diff: -0.00001 Loss-Valid Diff: -0.00006 Loss-12margin Train: 0.29140 Loss-12margin Valid: 0.28356
+Saving the model, end of epoch 2
+Epochs 3 Train loss: 0.00064 Valid loss: 0.00064 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00004 Loss-12margin Train: 0.27810 Loss-12margin Valid: 0.27111
+Saving the model, end of epoch 3
+Epochs 4 Train loss: 0.00062 Valid loss: 0.00062 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00002 Loss-12margin Train: 0.27139 Loss-12margin Valid: 0.26844
+Saving the model, end of epoch 4
+Epochs 5 Train loss: 0.00060 Valid loss: 0.00062 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00001 Loss-12margin Train: 0.26668 Loss-12margin Valid: 0.26800
+Saving the model, end of epoch 5
+Epochs 6 Train loss: 0.00059 Valid loss: 0.00059 Valid-Train Diff: -0.00000 Loss-Valid Diff: -0.00002 Loss-12margin Train: 0.26366 Loss-12margin Valid: 0.25730
+Saving the model, end of epoch 6
+Epochs 7 Train loss: 0.00058 Valid loss: 0.00059 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.26038 Loss-12margin Valid: 0.25693
+Saving the model, end of epoch 7
+Epochs 8 Train loss: 0.00058 Valid loss: 0.00058 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00001 Loss-12margin Train: 0.25790 Loss-12margin Valid: 0.25263
+Saving the model, end of epoch 8
+Epochs 9 Train loss: 0.00057 Valid loss: 0.00058 Valid-Train Diff: 0.00001 Loss-Valid Diff: 0.00001 Loss-12margin Train: 0.25599 Loss-12margin Valid: 0.25323
+Saving the model, end of epoch 9
+Epochs 10 Train loss: 0.00057 Valid loss: 0.00058 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.25470 Loss-12margin Valid: 0.25228
+Saving the model, end of epoch 10
+Epochs 11 Train loss: 0.00056 Valid loss: 0.00060 Valid-Train Diff: 0.00004 Loss-Valid Diff: 0.00002 Loss-12margin Train: 0.25325 Loss-12margin Valid: 0.26714
+Saving the model, end of epoch 11
+Epochs 12 Train loss: 0.00056 Valid loss: 0.00057 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00003 Loss-12margin Train: 0.25205 Loss-12margin Valid: 0.25238
+Saving the model, end of epoch 12
+Epochs 13 Train loss: 0.00056 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00001 Loss-12margin Train: 0.25095 Loss-12margin Valid: 0.24772
+Saving the model, end of epoch 13
+Epochs 14 Train loss: 0.00055 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.25023 Loss-12margin Valid: 0.24712
+Saving the model, end of epoch 14
+Epochs 15 Train loss: 0.00055 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.24949 Loss-12margin Valid: 0.24519
+Saving the model, end of epoch 15
+Epochs 16 Train loss: 0.00055 Valid loss: 0.00055 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00001 Loss-12margin Train: 0.24791 Loss-12margin Valid: 0.24400
+Saving the model, end of epoch 16
+Epochs 17 Train loss: 0.00055 Valid loss: 0.00056 Valid-Train Diff: 0.00001 Loss-Valid Diff: 0.00000 Loss-12margin Train: 0.24708 Loss-12margin Valid: 0.24351
+Saving the model, end of epoch 17
+Epochs 18 Train loss: 0.00055 Valid loss: 0.00058 Valid-Train Diff: 0.00003 Loss-Valid Diff: 0.00002 Loss-12margin Train: 0.24688 Loss-12margin Valid: 0.24934
+Saving the model, end of epoch 18
+Epochs 19 Train loss: 0.00055 Valid loss: 0.00055 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00002 Loss-12margin Train: 0.24667 Loss-12margin Valid: 0.24308
+Saving the model, end of epoch 19
+Epochs 20 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.24549 Loss-12margin Valid: 0.24141
+Saving the model, end of epoch 20
+Epochs 21 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.24522 Loss-12margin Valid: 0.24122
+Saving the model, end of epoch 21
+Epochs 22 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.24413 Loss-12margin Valid: 0.24034
+Saving the model, end of epoch 22
+Epochs 23 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00000 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.24367 Loss-12margin Valid: 0.23995
+Saving the model, end of epoch 23
+Epochs 24 Train loss: 0.00054 Valid loss: 0.00055 Valid-Train Diff: 0.00001 Loss-Valid Diff: 0.00000 Loss-12margin Train: 0.24397 Loss-12margin Valid: 0.24086
+Saving the model, end of epoch 24
+Epochs 25 Train loss: 0.00054 Valid loss: 0.00054 Valid-Train Diff: 0.00001 Loss-Valid Diff: -0.00000 Loss-12margin Train: 0.24293 Loss-12margin Valid: 0.23894
+Saving the model, end of epoch 25
+Early Stopping at epoch: 25
+Loading: checkpoints_best_config_epoch_mech_12margin_2/checkpoint_20.pt
+Finished Training

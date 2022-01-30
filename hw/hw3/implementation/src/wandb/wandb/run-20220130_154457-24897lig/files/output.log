@@ -1,0 +1,9 @@
+Net(
+  (conv1): Conv2d(1, 16, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (conv2): Conv2d(16, 3, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+  (relu): ReLU()
+  (tanh): Tanh()
+)
+training begins
+device: cuda:0
+[34m[1mwandb[39m[22m: [33mWARNING[39m Calling wandb.login() after wandb.init() has no effect.

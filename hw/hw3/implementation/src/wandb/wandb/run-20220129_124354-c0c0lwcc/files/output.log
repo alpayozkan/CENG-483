@@ -205,3 +205,4 @@ Epochs 99 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00000 Loss
 Saving the model, end of epoch 99
 Epochs 100 Train loss: 0.00052 Valid loss: 0.00052 Valid-Train Diff: 0.00001 Loss-Valid Diff: 0.00000 Loss-12margin Train: 0.00000 Loss-12margin Valid: 0.00000
 Saving the model, end of epoch 100
+Finished Training

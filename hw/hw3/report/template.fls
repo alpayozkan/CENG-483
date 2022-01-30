@@ -185,9 +185,12 @@ INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/learning_rate/conv_lr.pn
 INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/part-2.png
 INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/part-2.png
 INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/part-2.png
-INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss.png
-INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss.png
-INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss.png
+INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_mse.png
+INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_mse.png
+INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_mse.png
+INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_12margin.png
+INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_12margin.png
+INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_12margin.png
 INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/template.aux
 INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/template.out
 INPUT /home/pumpkin/.git/CENG-483/hw/hw3/report/template.out

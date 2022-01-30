@@ -300,21 +300,60 @@ This part will be obtained by us using the estimations you will provide. Please 
 \begin{center}
 \raggedright
 My implementation is a .ipynb python notebook. For hyperparameter tuning and extracting loss-curves I've made use of wandb (weights and biases).
-in order to tune hyperparameters and monitor plots more compactly. It just requires an API-key to initiate the terminal
+in order to tune hyperparameters and monitor plots more compactly. It just requires an API-key to initiate the terminal, then just need to set 
+wandb.init as corresponding project name and user. I supposed that this is a common platform in research, but I can also provide my additional account's API-key in case
+you don't have any wandb: \\
+\textbf{api-key = 8bcc0e905b907134d50839c4ecd0a65d7ac754b6} \\ 
+replace wandb.init \\
+\textbf{wandb.init(project="vision", entity="aoao")} \\
+If this doesn't work out, you can open your wandb, create a project and replace the corresponding wandb parameters.
+\\
+Also, I've written my model's estimations in estimations\_test.npy which basically includes first 100 jpg images in test dataset.
+img\_names.txt corresponds to [0.jpg,99.jpg] and it has a newline at the end each line which might be a bit different than the given line reading method in eval.py,
+because I couldn't fully understand how lines should be split.
+\\~\\
+In my test function, I had an issue while converting torch tensors to numpy arrays. My code successfully saves colorized test\_inputs imgs
+to png from torch tensors. However, when I've read .npy and tried to cv2.imshow, the extracted picture from the numpy array was totally non-sense
+(like smaller and duplicated x9 times and grayed etc.), 
+I've checked some forums and identified: https://stackoverflow.com/questions/33725237/image-fromarray-changes-size. \\
+I think there is a compatibility issue between numpy and image reading, that's why 
+I tried transposing and reshaping to get the same images that are saved from torch tensors, and it did,
+but there might be a small bug that I'm not aware of. However, from the 12-margin error
+standpoint, it shouldn't matter much, if we've extracted or saved numpy arrays in the same manner, every test pixel should correspond
+to its label pixel. In addition, I have calculated 12-margin error in training and validation loops
+by using torch tensors which was much easier than numpy arrays in terms of saving and extracting.
+\\~\\
+Moreover, this notebook can also be run through google collab, at first I've worked with colab however google has banned me
+for using their servers too much that's why I had to run on my local gpu. That's
+why I've left some of the colab codes as commented, but they can be used easily in case needed, just need to put corresponding files and folders in your drive.
+\\
+Also, I've started the terminal from src/wandb directory that's why my data-root is a bit different, than the given one.
+\\~\\
+In get\_loaders function,
+Test\_loader is not actually a data-loader, it's torch tensor, since we don't have any labels for test-set,
+I couldn't use the given dataloader, but instead created a 200x1x80x80 tensor and
+converted it to 200x1x1x80x80 since model runs on batches and it's handled that way.
+Also, I've assumed that there are 2000 images in test\_inputs and hard-coded img extraction in this part.
+Test function takes this test\_loader and for each image it calculates the output, saves test-img (this is optional not mentioned in requirements) with save\_image which expects [0,1] scaled images,
+but for numpy estimations they're scaled to [0,255] interval.
+\\~\\
+Furthermore, my code calculates estimations for all 2000 images in test-set and saves as .npy, for first 100 I've just extracted first 100 of them and saved in terminator.
+So, my .npy submission includes first 100 jpgs and you will get 100x80x80x3, but if you run the code you'll get 2000x80x80x3.
 
 \end{center}
 
 \section{Additional Comments and References}
 
+MSE losses are per datapoint not per batch which has been assured by counting number of examples in loops and scaling accumulated batch losses. 
+\\~\\
 Throughout this assignment and experiments, I've made use of wandb for data visualization and logging.
-All of my experiments are logged and can be monitored. In case any further inspection is needed check out the following wandb experiment report at url:
-----<!!>----
-
-my losses are per datapoint not per batch.
-
-
-
-
+All of my experiments are logged in my wandb vision repository and some of the results for each part can be monitored. In case any further inspection is needed check out the following wandb experiment reports at urls:
+\\~\\
+https://wandb.ai/alpayozkan/vision/reports/Part-3--VmlldzoxNTAyNTQ3?accessToken=x7gwi5ni3z7sy6hfa5jiojieda62v2uls92b0ozg7i2q24vwwfs7nf0qfy1nxv8o
+https://wandb.ai/alpayozkan/vision/reports/Part-2--VmlldzoxNTAyNTUw?accessToken=wy4vv5uzq2uif1b4jq6q5pr2zg1ft4f8g81dlzugm57hgkp3stdizvokcchmyll0
+https://wandb.ai/alpayozkan/vision/reports/Part-1--VmlldzoxNTAyNTUz?accessToken=s4076hl3ue1agne51jubkpj45360y42yf88cwbr5b1gfmiilca80splu9hbn31yg
+\\~\\
+Additionally, I've included my model's predictions for test\_inputs imgs as zip file.
 
 
 

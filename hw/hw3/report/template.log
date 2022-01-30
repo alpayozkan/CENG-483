@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.12)  30 JAN 2022 22:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.12)  30 JAN 2022 23:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -502,29 +502,59 @@ File: figures/best_config_loss_12margin.png Graphic file (type png)
 Package pdftex.def Info: figures/best_config_loss_12margin.png  used on input line 292.
 (pdftex.def)             Requested size: 375.36298pt x 156.6096pt.
  [6 </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_mse.png> </home/pumpkin/.git/CENG-483/hw/hw3/report/figures/best_config_loss_12margin.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 321.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 321.
+Underfull \hbox (badness 10000) in paragraph at lines 347--357
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 347--357
+
+ []
+
+
+Overfull \hbox (261.272pt too wide) in paragraph at lines 347--357
+\OT1/cmr/m/n/10.95 https://wandb.ai/alpayozkan/vision/reports/Part-3--VmlldzoxNTAyNTQ3?accessToken=x7gwi5ni3z7sy6hfa5jiojieda62v2uls92b0ozg7i2q24vwwfs7nf0qfy1nxv8o
+ []
+
+
+Overfull \hbox (269.69737pt too wide) in paragraph at lines 347--357
+\OT1/cmr/m/n/10.95 https://wandb.ai/alpayozkan/vision/reports/Part-2--VmlldzoxNTAyNTUw?accessToken=wy4vv5uzq2uif1b4jq6q5pr2zg1ft4f8g81dlzugm57hgkp3stdizvokcchmyll0
+ []
+
+
+Overfull \hbox (267.02072pt too wide) in paragraph at lines 347--357
+\OT1/cmr/m/n/10.95 https://wandb.ai/alpayozkan/vision/reports/Part-1--VmlldzoxNTAyNTUz?accessToken=s4076hl3ue1agne51jubkpj45360y42yf88cwbr5b1gfmiilca80splu9hbn31yg 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 347--357
+
+ []
+
+[7]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 360.
+ [8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 360.
  (/home/pumpkin/.git/CENG-483/hw/hw3/report/template.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 321.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 321.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 360.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 360.
 Package rerunfilecheck Info: File `template.out' has not changed.
 (rerunfilecheck)             Checksum: 3388137C1DC044985C8BFDC1B237C21F;343.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 321.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 360.
  ) 
 Here is how much of TeX's memory you used:
- 10315 strings out of 481239
- 155775 string characters out of 5920376
+ 10316 strings out of 481239
+ 155781 string characters out of 5920376
  617674 words of memory out of 5000000
  25381 multiletter control sequences out of 15000+600000
  534797 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,6n,42p,538b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on /home/pumpkin/.git/CENG-483/hw/hw3/report/template.pdf (7 pages, 650820 bytes).
+Output written on /home/pumpkin/.git/CENG-483/hw/hw3/report/template.pdf (8 pages, 658951 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
+ 115 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
+ 21 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

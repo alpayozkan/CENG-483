@@ -38,3 +38,6 @@ config: {'epochs': 100, 'batch_size': 16, 'learning_rate': 0.1, 'architecture': 
 2022-01-30 22:13:00,178 INFO    MainThread:9408 [wandb_init.py:_resume_backend():293] resuming backend
 2022-01-30 22:13:00,178 INFO    MainThread:9408 [wandb_init.py:_pause_backend():284] pausing backend
 2022-01-30 22:13:00,178 INFO    MainThread:9408 [jupyter.py:save_ipynb():374] not saving jupyter notebook
+2022-01-30 23:42:11,910 INFO    MainThread:9408 [wandb_init.py:_resume_backend():293] resuming backend
+2022-01-30 23:42:11,911 INFO    MainThread:9408 [wandb_init.py:_pause_backend():284] pausing backend
+2022-01-30 23:42:11,912 INFO    MainThread:9408 [jupyter.py:save_ipynb():374] not saving jupyter notebook

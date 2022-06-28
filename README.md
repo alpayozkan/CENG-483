@@ -1,2 +1,2 @@
 # CENG-483
-Computer Vision, METU, Gokberk Cinbis
+Computer Vision, METU, Prof. Gokberk Cinbis
